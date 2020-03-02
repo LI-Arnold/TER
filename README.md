@@ -1,5 +1,6 @@
 # TER
-Pour exécuter le script R :
+Pour exécuter le script R sous Linus :
 
-source(file = "TER\\Requetes.r")
+taper dans Rstudio setwd("chemin jusqu'au dossier R")
+puis taper source("Requetes.r")
 
