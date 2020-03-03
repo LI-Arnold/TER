@@ -1,10 +1,10 @@
-library(RSQLite)
+library(proto)
 library(gsubfn)
-library(proto) 
+library(RSQLite)
 library(sqldf) 
 
 
-dataset <- lapply(Sys.glob("participant-data-semain43/Measures/Participant*.csv"), read.csv, header=TRUE, sep=",")
+dataset <- lapply(Sys.glob("TER\\participant-data-semain43\\Measures\\*.csv"), read.csv, header=TRUE, sep=",")
 df <- do.call(rbind, dataset)
 sql1 ="SELECT * from df;"
 mesures_participants<-sqldf(sql1)
@@ -143,3 +143,4 @@ resultat9<-sqldf(sql11)
 resultat10<-sqldf(sql12)
 
 resultatFinal<-rbind(resultat1,resultat3,resultat2,resultat4,resultat5,resultat6,resultat7,resultat8,resultat9,resultat10)
+
