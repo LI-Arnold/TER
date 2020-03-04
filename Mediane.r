@@ -4,7 +4,7 @@ library(proto)
 library(sqldf) 
 
 
-dataset <- lapply(Sys.glob("participant-data-semain43/Measures/Participant*.csv"), read.csv, header=TRUE, sep=",")
+dataset <- lapply(Sys.glob("TER\\participant-data-semain43\\Measures\\Participant*.csv"), read.csv, header=TRUE, sep=",")
 df <- do.call(rbind, dataset)
 sql1 ="SELECT * from df;"
 mesures_participants<-sqldf(sql1)
@@ -84,9 +84,8 @@ sql5 ="SELECT
  	    ORDER BY BC LIMIT 1 OFFSET (SELECT COUNT(BC) FROM Questionnaire q1,df df1  WHERE q1.participant_virtual_id=df1.participant_virtual_id ) / 2)
  		AS 'mediane_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie 
-		HAVING( q_21='Oui');"
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_21='Oui'
+		GROUP BY Categorie;"
 	
 sql6 ="SELECT
 		CASE
@@ -163,8 +162,8 @@ sql8 ="SELECT
  	    ORDER BY BC LIMIT 1 OFFSET (SELECT COUNT(BC) FROM Questionnaire q1,df df1  WHERE q1.participant_virtual_id=df1.participant_virtual_id ) / 2)
  		AS 'mediane_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie having(\"q_66.a\" not null); "	
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND \"q_66.a\" IS NOT NULL
+		GROUP BY Categorie; "	
 		
 sql9 ="SELECT
 		CASE
@@ -191,8 +190,8 @@ sql9 ="SELECT
  	    ORDER BY BC LIMIT 1 OFFSET (SELECT COUNT(BC) FROM Questionnaire q1,df df1  WHERE q1.participant_virtual_id=df1.participant_virtual_id ) / 2)
  		AS 'mediane_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie having(q_44_4_1 not null); "
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_44_4_1 IS NOT NULL
+		GROUP BY Categorie; "
 		
 sql10 ="SELECT
 		CASE	
@@ -215,8 +214,8 @@ sql10 ="SELECT
  	    ORDER BY BC LIMIT 1 OFFSET (SELECT COUNT(BC) FROM Questionnaire q1,df df1  WHERE q1.participant_virtual_id=df1.participant_virtual_id ) / 2)
  		AS 'mediane_BC'
 		FROM Questionnaire,df 
- 		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie having(q_44_4_1 not null); "
+ 		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_44_4_1 IS NOT NULL
+		GROUP BY Categorie; "
 
 
 sql11 ="SELECT
@@ -244,8 +243,8 @@ sql11 ="SELECT
  	    ORDER BY BC LIMIT 1 OFFSET (SELECT COUNT(BC) FROM Questionnaire q1,df df1  WHERE q1.participant_virtual_id=df1.participant_virtual_id ) / 2)
  		AS 'mediane_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie having(q_59_1 not null); "
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_59_1 IS NOT NULL
+		GROUP BY Categorie; "
 		
 sql12 ="SELECT
 		CASE	
@@ -270,8 +269,8 @@ sql12 ="SELECT
  	    ORDER BY BC LIMIT 1 OFFSET (SELECT COUNT(BC) FROM Questionnaire q1,df df1  WHERE q1.participant_virtual_id=df1.participant_virtual_id ) / 2)
  		AS 'mediane_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie having(q_58 not null); "
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_58 IS NOT NULL
+		GROUP BY Categorie; "
 		
 resultat1<-sqldf(sql3)
 

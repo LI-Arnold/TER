@@ -20,26 +20,25 @@ sql3 ="SELECT
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',avg(\"PM2.5\") as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',avg(PM10) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',avg(\"PM1.0\") as 'MOY_PM1.0', max(cast(NO2 AS INTEGER)) as 'MAX_NO2' , min(cast(NO2 AS INTEGER)) as 'MIN_NO2' , avg(NO2) as 'MOY_NO2' , max(cast(BC AS INTEGER)) as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,avg(BC) as 'MOY_BC'
 		FROM Questionnaire,df 
 		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie HAVING(\"q_17.1\" not null);"
+		GROUP BY Categorie;"
 
 sql4 ="SELECT  
 	    CASE  
-        WHEN \"q_20.2\"='Non' THEN 'Non Fumeur' 
+        WHEN \"q_20.2\"='Non' THEN 'Non Fumeur'
+		WHEN \"q_20.2\" IS NULL THEN 'Non Fumeur'
 		WHEN \"q_20.2\"='Oui' THEN 'Fumeur' 
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',avg(\"PM2.5\") as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',avg(PM10) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',avg(\"PM1.0\") as 'MOY_PM1.0' , max(cast(NO2 AS INTEGER)) as 'MAX_NO2',min(cast(NO2 AS INTEGER)) as 'MIN_NO2', avg(NO2) as 'MOY_NO2' , max(cast(BC AS INTEGER)) as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,avg(BC) as 'MOY_BC' 
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id  = df.participant_virtual_id 
-		GROUP BY Categorie 
-		HAVING(\"q_20.2\" not null);"
+		WHERE Questionnaire.participant_virtual_id  = df.participant_virtual_id AND \"q_20.2\" IS NOT NULL
+		GROUP BY Categorie;"
 	
 sql5 ="SELECT  
 	    CASE 
 		WHEN  q_21='Oui' THEN 'Expose a la fumee'
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',avg(\"PM2.5\") as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',avg(PM10) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',avg(\"PM1.0\") as 'MOY_PM1.0' , max(cast(NO2 AS INTEGER)) as 'MAX_NO2',min(cast(NO2 AS INTEGER)) as 'MIN_NO2', avg(NO2) as 'MOY_NO2' , max(cast(BC AS INTEGER)) as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,avg(BC) as 'MOY_BC'   
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie 
-		HAVING( q_21 NOT NULL);"
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_21 IS NOT NULL
+		GROUP BY Categorie;"
 	
 sql6 ="SELECT
 		CASE
@@ -57,9 +56,8 @@ sql7 ="SELECT
 		WHEN  q_68_1='Non' THEN 'Locataire'	
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',avg(\"PM2.5\") as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',avg(PM10) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',avg(\"PM1.0\") as 'MOY_PM1.0' ,  max(cast(NO2 AS INTEGER)) as 'MAX_NO2',min(cast(NO2 AS INTEGER)) as 'MIN_NO2', avg(NO2) as 'MOY_NO2' , max(cast(BC AS INTEGER)) as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,avg(BC) as 'MOY_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie
-		HAVING( q_68_1 NOT NULL);"
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_68_1 IS NOT NULL
+		GROUP BY Categorie;"
 	
 sql8 ="SELECT
 		CASE
@@ -71,8 +69,8 @@ sql8 ="SELECT
 		THEN 'Revenu>4000'	
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',avg(\"PM2.5\") as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',avg(PM10) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',avg(\"PM1.0\") as 'MOY_PM1.0' ,  max(cast(NO2 AS INTEGER))as 'MAX_NO2',min(cast(NO2 AS INTEGER)) as 'MIN_NO2', avg(NO2) as 'MOY_NO2' , max(cast(BC AS INTEGER))as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,avg(BC) as 'MOY_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie having(\"q_66.a\" not null); "	
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND \"q_66.a\" IS NOT NULL
+		GROUP BY Categorie; "	
 		
 sql9 ="SELECT
 		CASE
@@ -82,9 +80,8 @@ sql9 ="SELECT
 		THEN 'Non usager de transport en commun'		
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',avg(\"PM2.5\") as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',avg(PM10) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',avg(\"PM1.0\") as 'MOY_PM1.0' , max(cast(NO2 AS INTEGER)) as 'MAX_NO2',min(cast(NO2 AS INTEGER)) as 'MIN_NO2', avg(NO2) as 'MOY_NO2' , max(cast(BC AS INTEGER)) as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,avg(BC) as 'MOY_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie 
-		HAVING(q_44_4_1 not null); "
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_44_4_1 IS NOT NULL
+		GROUP BY Categorie; "
 		
 sql10 ="SELECT
 		CASE	
@@ -92,9 +89,8 @@ sql10 ="SELECT
 		THEN 'Usage doux de transport'	
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',avg(\"PM2.5\") as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',avg(PM10) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',avg(\"PM1.0\") as 'MOY_PM1.0' , max(cast(NO2 AS INTEGER)) as 'MAX_NO2',min(cast(NO2 AS INTEGER)) as 'MIN_NO2', avg(NO2) as 'MOY_NO2' , max(cast(BC AS INTEGER))  as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,avg(BC) as 'MOY_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie 
-		HAVING(q_44_4_1 not null); "
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_44_4_1 IS NOT NULL
+		GROUP BY Categorie; "
 
 sql11 ="SELECT
 		CASE	
@@ -106,9 +102,8 @@ sql11 ="SELECT
 		THEN 'Age plus de 50'	
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',avg(\"PM2.5\") as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',avg(PM10) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',avg(\"PM1.0\") as 'MOY_PM1.0' , max(cast(NO2 AS INTEGER)) as 'MAX_NO2',min(cast(NO2 AS INTEGER)) as 'MIN_NO2', avg(NO2) as 'MOY_NO2' , max(cast(BC AS INTEGER))  as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,avg(BC) as 'MOY_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie 
-		HAVING(q_59_1 not null); "
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id
+		GROUP BY Categorie having(q_59_1 not null); "
 		
 sql12 ="SELECT
 		CASE	
@@ -118,9 +113,8 @@ sql12 ="SELECT
 		THEN 'Une femme'	
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',avg(\"PM2.5\") as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',avg(PM10) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',avg(\"PM1.0\") as 'MOY_PM1.0' , max(cast(NO2 AS INTEGER)) as 'MAX_NO2',min(cast(NO2 AS INTEGER)) as 'MIN_NO2', avg(NO2) as 'MOY_NO2' , max(cast(BC AS INTEGER))  as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,avg(BC) as 'MOY_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id 
-		GROUP BY Categorie 
-		HAVING(q_58 not null); "
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_58 IS NOT NULL
+		GROUP BY Categorie; "
 		
 resultat1<-sqldf(sql3)
 
