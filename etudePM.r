@@ -131,5 +131,3 @@ Voiture <-sqldf(sql7)
 
 
 
-
-

@@ -1,0 +1,42 @@
+library(RSQLite)
+library(gsubfn)
+library(proto) 
+library(sqldf) 
+
+dataset <- lapply(Sys.glob("participant-data-semain43/Measures/Participant*.csv"), read.csv, header=TRUE, sep=",")
+df <- do.call(rbind, dataset)
+
+questionnaire<-read.csv("questionnaire_participants.csv",header=TRUE,sep=",")
+
+#~ requête qui montre la moyenne du PM1 en fonction des differente activity
+sql0 = "SELECT df.participant_virtual_id,activity,avg(\"PM1.0\") as 'MOY_PM1.0'
+		FROM df, questionnaire
+		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
+		GROUP BY activity
+		EXCEPT 
+		SELECT df.participant_virtual_id,activity,avg(\"PM1.0\") as 'MOY_PM1.0'
+		FROM df, questionnaire
+		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
+		AND activity = 'NULL';"
+		
+activity<-sqldf(sql0)
+
+
+#~ requête qui montre la moyenne des PM1 au Restaurant en fonction des differente event
+sql3 = "SELECT df.participant_virtual_id,activity, event ,avg(\"PM1.0\") as 'MOY_PM1.0'
+		FROM df, questionnaire
+		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
+		AND activity = 'Restaurant'
+		GROUP BY event
+		EXCEPT 
+		SELECT df.participant_virtual_id,activity, event ,avg(\"PM1.0\") as 'MOY_PM1.0'
+		FROM df, questionnaire
+		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
+		AND activity = 'Restaurant'
+		AND event = 'NULL';"
+
+Restaurant<-sqldf(sql3)
+
+
+ ggplot(data=Restaurant, aes(x=event,y=MOY_PM1.0)) + 
++     geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),bandwidth=8) +ggtitle("Moyenne de PM1.0 en fontion de l'event au restaurant")

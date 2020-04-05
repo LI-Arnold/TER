@@ -3,15 +3,10 @@ library(gsubfn)
 library(RSQLite)
 library(sqldf) 
 
-
-dataset <- lapply(Sys.glob("TER\\participant-data-semain43\\Measures\\*.csv"), read.csv, header=TRUE, sep=",")
+dataset <- lapply(Sys.glob("participant-data-semain43/Measures/Participant*.csv"), read.csv, header=TRUE, sep=",")
 df <- do.call(rbind, dataset)
-sql1 ="SELECT * from df;"
-mesures_participants<-sqldf(sql1)
 
 Questionnaire<-read.csv("questionnaire_participants.csv",header=TRUE,sep=",")
-sql2 ="SELECT * FROM  Questionnaire;"
-questionnaire<-sqldf(sql2)
 
 sql3 ="SELECT  
         CASE 
