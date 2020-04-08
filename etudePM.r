@@ -9,12 +9,15 @@ df <- do.call(rbind, dataset)
 questionnaire<-read.csv("questionnaire_participants.csv",header=TRUE,sep=",")
 
 #~ requête qui montre la moyenne des PM en fonction des differente activity
-sql0 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+
+sql0 = "SELECT activity, ROUND(avg(\"PM2.5\"),2) AS 'MOY_PM2.5',ROUND(stdev(\"PM2.5\"),2) as 'Ecart(PM2.5)' , ROUND(avg(PM10),2) as 'MOY_PM10' ,ROUND(stdev(\"PM10\"),2) as 'Ecart(PM10)',ROUND(avg(\"PM1.0\"),2) as 'MOY_PM1.0',ROUND(avg(NO2),2) as 'MOY_NO2',ROUND(stdev(NO2),2) as 'Ecart(NO2)',ROUND(avg(BC),2) as 'MOY_BC',ROUND(stdev(BC),2) as 'Ecart(BC)'
+
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		GROUP BY activity
 		EXCEPT 
-		SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+
+		SELECT activity, ROUND(avg(\"PM2.5\"),2) AS 'MOY_PM2.5',ROUND(stdev(\"PM2.5\"),2) as 'Ecart(PM2.5)' , ROUND(avg(PM10),2) as 'MOY_PM10' ,ROUND(stdev(\"PM10\"),2) as 'Ecart(PM10)',ROUND(avg(\"PM1.0\"),2) as 'MOY_PM1.0',ROUND(avg(NO2),2) as 'MOY_NO2',ROUND(stdev(NO2),2) as 'Ecart(NO2)',ROUND(avg(BC),2) as 'MOY_BC',ROUND(stdev(BC),2) as 'Ecart(BC)'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND activity = 'NULL';"
@@ -83,12 +86,13 @@ Bureau <-sqldf(sql4)
 
 
 #~ requête qui montre la moyenne des temperature et humidity en fonction des differente activity
-sql5 = "SELECT activity, AVG(Temperature) AS 'MOY_TEMP', AVG(Humidity) AS 'MOY_HUM'
+
+sql5 = "SELECT activity, ROUND(AVG(Temperature),2) AS 'MOY_TEMP',ROUND(stdev(Temperature),2) as 'Ecart(Temperature)', ROUND(AVG(Humidity),2) AS 'MOY_HUM',ROUND(stdev(Humidity),2) as 'Ecart(Humidity)'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		GROUP BY activity
 		EXCEPT 
-		SELECT activity,  AVG(Temperature) AS 'MOY_TEMP', AVG(Humidity) AS 'MOY_HUM'
+		SELECT activity, ROUND(AVG(Temperature),2) AS 'MOY_TEMP',ROUND(stdev(Temperature),2) as 'Ecart(Temperature)', ROUND(AVG(Humidity),2) AS 'MOY_HUM',ROUND(stdev(Humidity),2) as 'Ecart(Humidity)'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND activity = 'NULL';"
