@@ -3,7 +3,7 @@ library(gsubfn)
 library(RSQLite)
 library(sqldf) 
 
-dataset <- lapply(Sys.glob("participant-data-semain43\\Measures\\Participant*.csv"), read.csv, header=TRUE, sep=",")
+dataset <- lapply(Sys.glob("participant-data-semain43/Measures/Participant*.csv"), read.csv, header=TRUE, sep=",")
 df <- do.call(rbind, dataset)
 
 

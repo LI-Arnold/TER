@@ -130,6 +130,18 @@ sql7 = "SELECT activity, event , avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'M
 
 Voiture <-sqldf(sql7)
 
+sql8 = "SELECT df.participant_virtual_id, ROUND(avg(\"PM2.5\"),2) AS 'MOY_PM2.5',ROUND(stdev(\"PM2.5\"),2) as 'Ecart(PM2.5)' ,min(\"PM2.5\") as 'MIN_PM2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5', ROUND(avg(PM10),2) as 'MOY_PM10' ,ROUND(stdev(\"PM10\"),2) as 'Ecart(PM10)',min(\"PM10\") as 'MIN_PM10' ,max(\"PM10\")  as 'MAX_PM10',ROUND(avg(\"PM1.0\"),2) as 'MOY_PM1.0',ROUND(stdev(\"PM1.0\"),2) as 'Ecart(PM1.0)',min(\"PM1.0\") as 'MIN_PM1.0' ,max(\"PM1.0\")  as 'MAX_PM1.0',ROUND(avg(NO2),2) as 'MOY_NO2',ROUND(stdev(NO2),2) as 'Ecart(NO2)',min(cast(NO2 AS INTEGER)) as 'MIN_NO2' ,max(cast(NO2 AS INTEGER)) as 'MAX_NO2',ROUND(avg(BC),2) as 'MOY_BC',ROUND(stdev(BC),2) as 'Ecart(BC)',min(cast(BC AS INTEGER)) as 'MIN_BC' ,max(cast(BC AS INTEGER)) as 'MAX_BC'
+		FROM df, questionnaire
+		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
+		GROUP BY df.participant_virtual_id
+		EXCEPT 
+		SELECT df.participant_virtual_id, ROUND(avg(\"PM2.5\"),2) AS 'MOY_PM2.5',ROUND(stdev(\"PM2.5\"),2) as 'Ecart(PM2.5)' ,min(\"PM2.5\") as 'MIN_PM2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5', ROUND(avg(PM10),2) as 'MOY_PM10' ,ROUND(stdev(\"PM10\"),2) as 'Ecart(PM10)',min(\"PM10\") as 'MIN_PM10' ,max(\"PM10\")  as 'MAX_PM10',ROUND(avg(\"PM1.0\"),2) as 'MOY_PM1.0',ROUND(stdev(\"PM1.0\"),2) as 'Ecart(PM1.0)',min(\"PM1.0\") as 'MIN_PM1.0' ,max(\"PM1.0\")  as 'MAX_PM1.0',ROUND(avg(NO2),2) as 'MOY_NO2',ROUND(stdev(NO2),2) as 'Ecart(NO2)',min(cast(NO2 AS INTEGER)) as 'MIN_NO2' ,max(cast(NO2 AS INTEGER))  as 'MAX_NO2',ROUND(avg(BC),2) as 'MOY_BC',ROUND(stdev(BC),2) as 'Ecart(BC)',min(cast(BC AS INTEGER)) as 'MIN_BC' ,max(cast(BC AS INTEGER))  as 'MAX_BC'
+		FROM df, questionnaire
+		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
+		AND activity = 'NULL';"
+		
+participant<-sqldf(sql8)
+
 
 
 
