@@ -1,0 +1,48 @@
+---
+title: "Rapport"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Etude sur les polluants 
+
+```{r warning=FALSE,echo=FALSE}
+library(ggplot2)
+library(knitr)
+load("donnée.RData")
+```
+
+On va essayer de déterminer le participant le plus exposer au polluant pour cela on a calculer les moyennes de tous les participants ainsi que leurs polluants.
+
+```{r warning=FALSE,echo=FALSE}
+kable(moy_participant)
+```
+
+On voit que en moyenne sauf pour le polluant BC que c'est le participant 9999932 qui est le plus exposé, on va ensuite voir pourquoi.
+
+```{r warning=FALSE,echo=FALSE}
+kable(ecart_moy)
+```
+
+Avec cette table d'écart type qui est calculer en fonction des moyennes est très interressante puisque en effet le participant 9999932 a certe la plus haute moyenne mais son écart à la moyenne est aussi la plus grande, si on se penche plus en détail sur la répartiton de l'exposition de ce participant.
+
+```{r warning=FALSE,echo=FALSE}
+kable(p9999932)
+```
+
+On voit que c'est dans les activités Rue et Restaurant que le participant est le plus exposé. Mais du coup une question se pose, es ce que dans toutes les rues et restaurants l'ai est aussi polluer. Bien sûr on imagie bien que non. 
+
+Revenons sur notre 1er tableau où l'on a la moyenne de tous les participants en fonction des polluants, on a vu que c'est le partiipant 9999932 qui est le plus exposé sauf pour le polluant BC.
+Maintenant on va se concentrer sur le polluant BC, on voit qu'il y a 4 participant exposer par ce polluant: le 9999915, 9999916 ,9999941, 9999944
+
+```{r warning=FALSE,echo=FALSE}
+ggplot(data=BC, aes(x=activity ,y=MOY_BC)) +geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),bandwidth=8) +ggtitle("Moyenne de BC des participants qui sont exposés en fontion des activités")
+```
+
+On voit que les 3 activités les plus touchés sont les Restaurants, la Rue et le Vélo
+
