@@ -17,32 +17,50 @@ library(knitr)
 load("donnée.RData")
 ```
 
-On va essayer de déterminer le participant le plus exposer au polluant pour cela on a calculer les moyennes de tous les participants ainsi que leurs polluants.
+On va essayer de déterminer le participant le plus exposer au polluant pour cela on a calculer les moyennes de tous les participants sur leurs exposition sur différents polluants.
 
 ```{r warning=FALSE,echo=FALSE}
-kable(moy_participant)
+kable(moy_participant, caption= "Table des moyenne des polluants de chaque participant")
 ```
 
-On voit que en moyenne sauf pour le polluant BC que c'est le participant 9999932 qui est le plus exposé, on va ensuite voir pourquoi.
+On voit que en moyenne sauf pour le polluant BC que c'est le participant 9999932 qui est le plus exposé, voyons voir si ces valeurs sont proche ou non de la moyenne pour cela on a calculer l'écart type.
 
 ```{r warning=FALSE,echo=FALSE}
-kable(ecart_moy)
+kable(ecart_moy,caption = "Table des écart type des polluants de chaque participant")
 ```
 
-Avec cette table d'écart type qui est calculer en fonction des moyennes est très interressante puisque en effet le participant 9999932 a certe la plus haute moyenne mais son écart à la moyenne est aussi la plus grande, si on se penche plus en détail sur la répartiton de l'exposition de ce participant.
+On remarque tout de suite que le participant 9999932 a une très grande dispersion de valeur puisque son écart type est grand c'est-à-dire qi'il y a des valeur abérrantes, on peut peutêtre en conclure que ce participant est beaucoup exposé à certain endroit que d'autre participant. Pour vérifier cela, on va voir en détail les valeurs d'exposition du participant 9999932
 
 ```{r warning=FALSE,echo=FALSE}
-kable(p9999932)
+kable(p9999932, caption = "Table des moyenne de polluant en fonction des activités du participant 9999932")
 ```
 
-On voit que c'est dans les activités Rue et Restaurant que le participant est le plus exposé. Mais du coup une question se pose, es ce que dans toutes les rues et restaurants l'ai est aussi polluer. Bien sûr on imagie bien que non. 
+Comme on le pensais, il y a des valeurs abérrantes. On voit que c'est dans les activités Rue et Restaurant que le participant est le plus exposé. Mais du coup une question se pose, es ce qu'il y a d'autre participant plus exposé au niveau de la durée c'est-à-dire avec une moyenne assez élévée mais son écart type assez faible.
+Si on regarde sur la 1ère table et la 2ème table, on voit aussi que les participants 9999944 et 9999946 sont plus exposés que les autres participants avec un petit écart type, voyons voir si eux aussi ont des valeurs abérrantes ou non.
 
-Revenons sur notre 1er tableau où l'on a la moyenne de tous les participants en fonction des polluants, on a vu que c'est le partiipant 9999932 qui est le plus exposé sauf pour le polluant BC.
+```{r warning=FALSE,echo=FALSE}
+kable(p9999944, caption = "Table des moyenne de polluant en fonction des activités du participant 9999944")
+kable(p9999946, caption = "Table des moyenne de polluant en fonction des activités du participant 9999946")
+```
+
+Si on ne prend pas en compte le polluant BC et NO2, les deux participants ont des valeurs assez proche.
+Maintenant ce que nous interesse c'est de savoir si les différentes caractéristiques de chaque participants peuvent changer l'exposition, c'est ce que nous allons voir ci-dessous avec quelque table 
+
+```{r warning=FALSE,echo=FALSE}
+kable(age)
+kable(sportif)
+kable(sexe)
+kable(sensible)
+```
+
+Comme vu précédemment le participant 9999932 avait une forte moyenne à l'exposition aux polluants et d'après ses tables on voit que c'est le seul qui n'es pas sportif. En plus les autres caractéristique n'ont pas l'air d'influencer l'exposition aux polluants.
+
+Revenons sur notre 1er tableau où l'on a la moyenne de tous les participants en fonction des polluants, on a vu que c'est le participant 9999932 qui est le plus exposé sauf pour le polluant BC.
 Maintenant on va se concentrer sur le polluant BC, on voit qu'il y a 4 participant exposer par ce polluant: le 9999915, 9999916 ,9999941, 9999944
 
 ```{r warning=FALSE,echo=FALSE}
 ggplot(data=BC, aes(x=activity ,y=MOY_BC)) +geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),bandwidth=8) +ggtitle("Moyenne de BC des participants qui sont exposés en fontion des activités")
 ```
 
-On voit que les 3 activités les plus touchés sont les Restaurants, la Rue et le Vélo
+On voit que les 3 activités les plus touchés sont les Restaurants, la Rue et le Vélo mais avec les caractéristique des participants, on ne pas rien en conclure.
 
