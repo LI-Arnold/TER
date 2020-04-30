@@ -1,0 +1,97 @@
+activity;event
+Domicile;Ouverture De Fenêtre
+Domicile;Cuisiner
+Domicile;Sport
+Domicile;Fermeture De Fenêtre
+Domicile;Fumer
+Domicile;Arrêter De Cuisiner
+Domicile;Allumage De Cheminée
+Domicile;Repos
+Domicile;Marcher
+Domicile;NULL
+Bureau;Repos
+Bureau;Fermeture De Fenêtre
+Bureau;Ouverture De Fenêtre
+Bureau;NULL
+Bureau;Fumer
+Magasin;Repos
+Magasin;Marcher
+Magasin;Sport
+Magasin;NULL
+Restaurant;Cuisiner
+Restaurant;Marcher
+Restaurant;NULL
+Restaurant;Repos
+Restaurant;Fermeture De Fenêtre
+Restaurant;Ouverture De Fenêtre
+Restaurant;Marcher
+Cinéma;Fermeture De Fenêtre
+Cinéma;Ouverture De Fenêtre
+Cinéma;Repos
+Cinéma;NULL
+Gare;NULL
+Gare;Repos
+Gare;Fermeture De Fenêtre
+Gare;Ouverture De Fenêtre
+Gare;Marcher
+Rue;Repos
+Rue;NULL
+Rue;Marcher
+Rue;promenade avec chien
+Rue;Fumer
+Rue;course �  pied
+Rue;Sport
+Parc;Marcher
+Parc;Repos
+Parc;Sport
+Parc;NULL
+Parc;course à pied
+Parc;promenade avec chien
+Montagne;NULL
+Montagne;Marcher
+Montagne;promenade avec chien
+Montagne;Fumer
+Montagne;course à pied
+Montagne;Sport
+Montagne;Repos
+Plage;NULL
+Plage;Marcher
+Plage;promenade avec chien
+Plage;Repos
+Plage;course à pied
+Plage;Sport
+Inconnu;NULL
+Inconnu;Marcher
+Inconnu;promenade avec chien
+Inconnu;Repos
+Inconnu;course à pied
+Inconnu;Sport
+Voiture;Fermeture De Fenêtre
+Voiture;Ouverture De Fenêtre
+Voiture;Fumer
+Voiture;Repos
+Voiture;NULL
+Métro;Fermeture De Fenêtre
+Métro;Ouverture De Fenêtre
+Métro;Repos
+Métro;Marcher
+Métro;NULL
+Bus;Fermeture De Fenêtre
+Bus;Ouverture De Fenêtre
+Bus;Repos
+Bus;Marcher
+Bus;NULL
+Moto;Repos
+Moto;NULL
+Vélo;NULL
+Vélo;Repos
+Tramway;Fermeture De Fenêtre
+Tramway;Ouverture De Fenêtre
+Tramway;Repos
+Tramway;Marcher
+Tramway;NULL
+Train;Fermeture De Fenêtre
+Train;Ouverture De Fenêtre
+Train;Repos
+Train;Marcher
+Train;NULL
