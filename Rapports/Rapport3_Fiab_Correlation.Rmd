@@ -1,0 +1,210 @@
+---
+title: "Rapport 3"
+author: 
+date: 
+output: pdf_document
+---
+               
+                   
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(RSQLite)
+library(gsubfn)
+library(proto) 
+library(sqldf)
+library(corrplot)
+library(tidyverse)
+library(dplyr)
+load("~/TER/Workspace.RData")
+```
+
+
+## Etude sur la fiabilité de Activité_évènement :
+
+Pour avoir des idées sur les anomalies activité_évènement et combien de fois apparaissent dans les données, on calcule le nombre de toutes les associations possibles:
+
+
+```{r  echo=FALSE}
+kable(NbrMatch[1:10, ], caption= "Extrait de correspondances avitivité_évènement avant l'identification des anomalies",align=rep('c', 4))
+```
+
+Après qu'on a créé un fichier csv et on l'a rempli manuellement avec toutes les associations possibles et logiques entre l'activité et évènement, puis on a importé dans un dataframe pour exécuter une requête NOT EXISTS qui va permettre de retourner toutes les anomalies sur les données.
+
+Nombre total d'anomalies s'élève à 58046 tenant compte des cas qui peuvent être un peu logiques, pourtant on les a compté parmi les anomalies.
+
+
+ activity| event  |   
+ :-: | :-:| 
+NULL  |  {Valeur}   |    
+NULL    |  NULL    |     
+Bureau   |    Marcher   | 
+Inconnu  | Ouverture De Fenêtre    | 
+Inconnu  |	Fermeture De Fenêtre    | 
+
+{valeur} : {Marcher,Repos,Fermeture De Fenêtre ,Ouverture De Fenêtre  }
+
+Vous trouverez le résultat avec précision de date et identifant de participant dans la table AnomaliesActivityEvent. 
+
+Le tableau suivant montre le nombre d'anomalies pour chaque activity/event
+
+```{r  echo=FALSE}
+requete<-"select activity,event,count(*) as Nombre_occurrences from AnomaliesActivityEvent group by activity,event;"
+ NbrAnomalies<-sqldf(requete)
+kable(NbrAnomalies, caption= "Les anomalies entre Activité et évènement",align=rep('c', 3))
+```
+
+
+## Analyse des moyennes des polluants par activity 
+
+Du fait qu'on utilise les requêtes sous RStudio, la fonction Pivot n'est pas valable là-dessus, du coup on a du chercher une alternative, et on a utiliser une clause Filter sur la colonne activity pour selectionner l'activité pour chaque Avg.Voici la requête :
+
+```{r  echo=TRUE}
+req2 <- "SELECT participant_virtual_id
+     , AVG(\"PM10\") FILTER (WHERE activity = 'Domicile') PM10_Domicile
+     , AVG(\"PM10\") FILTER (WHERE activity = 'Bureau') PM10_Bureau
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'Rue') PM10_Rue
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'Voiture') PM10_Voiture
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'VÃ©lo') PM10_Vélo
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'Bus') PM10_Bus
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'Train') PM10_Train
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'Restaurant') PM10_Restaurant
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'MÃ©tro') PM10_Métro
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'Magasin') PM10_Magasin
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'Parc') PM10_Parc
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'CinÃ©ma') PM10_Cinéma
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'Tramway') PM10_Tramway
+		FROM df	
+		GROUP BY participant_virtual_id;"
+ ActivitePM10<-sqldf(req2)
+ # Arrondir l'avg à deux chiffres après la virgule
+ActivitePM10<-ActivitePM10 %>% mutate_if(is.numeric, round, digits=2)
+
+```
+
+
+On a fait le même traitement pour PM10, PM1.0, NO2, BC.
+
+Pour savoir le lieu ou l'activité qui produit le plus PM2.5, on calcule la moyenne pour chaque activité_polluant, on prenant les grandes valeurs des moyennes et on obtient ce tableau :
+
+```{r  echo=FALSE}
+
+requete1<-"select AVG(\"PM2.5_Domicile\"),AVG(\"PM2.5_Bureau\"), avg(\"PM2.5_Rue\"),avg(\"PM2.5_Voiture\"),avg(\"PM2.5_Bus\"),avg(\"PM2.5_Train\"),avg(\"PM2.5_Restaurant\"),avg(\"PM2.5_Magasin\"),avg(\"PM2.5_Parc\"),avg(\"PM2.5_Tramway\") from \"ActivitePM2.5\" ;"
+ MoyActiv_EventPM2.5<-sqldf(requete1)
+
+ requete2<-"select AVG(\"PM1.0_Domicile\"),AVG(\"PM1.0_Bureau\"), avg(\"PM1.0_Rue\"),avg(\"PM1.0_Voiture\"),avg(\"PM1.0_Bus\"),avg(\"PM1.0_Train\"),avg(\"PM1.0_Restaurant\"),avg(\"PM1.0_Magasin\"),avg(\"PM1.0_Parc\"),avg(\"PM1.0_Tramway\") from \"ActivitePM1.0\" ;"
+ MoyActiv_EventPM1.0<-sqldf(requete2)
+ 
+ requete3<-"select AVG(\"PM10_Domicile\"),AVG(\"PM10_Bureau\"), avg(\"PM10_Rue\"),avg(\"PM10_Voiture\"),avg(\"PM10_Bus\"),avg(\"PM10_Train\"),avg(\"PM10_Restaurant\"),avg(\"PM10_Magasin\"),avg(\"PM10_Parc\"),avg(\"PM10_Tramway\") from \"ActivitePM10\" ;"
+ MoyActiv_EventPM10<-sqldf(requete3)
+ 
+ requete4<-"select AVG(\"NO2_Domicile\"),AVG(\"NO2_Bureau\"), avg(\"NO2_Rue\"),avg(\"NO2_Voiture\"),avg(\"NO2_Bus\"),avg(\"NO2_Train\"),avg(\"NO2_Restaurant\"),avg(\"NO2_Magasin\"),avg(\"NO2_Parc\") from \"ActiviteNO2\" ;"
+ MoyActiv_EventNO2<-sqldf(requete4)
+
+  requete5<-"select AVG(\"NO2_Domicile\"),AVG(\"NO2_Bureau\"), avg(\"NO2_Rue\"),avg(\"NO2_Voiture\"),avg(\"NO2_Bus\"),avg(\"NO2_Train\"),avg(\"NO2_Restaurant\"),avg(\"NO2_Magasin\"),avg(\"NO2_Parc\"),avg(\"PM10_Tramway\")  from \"ActiviteNO2\" ;"
+ MoyActiv_EventBC<-sqldf(requete5)
+```
+
+Polluant| Activité  |  Moyenne |
+ :-: | :-:| :-:|
+PM2.5  |  Restaurant  |  44.07|
+PM2.5    |  Rue    |  17.72   |
+PM10   |    Restaurant   | 50.23 |
+PM10  | Rue   | 22.60 |
+PM10  |	Bus  | 14.74 |
+PM1.0  |	Restaurant  | 28.13 |
+PM1.0  |	Train  | 7.60 |
+PM1.0  |	Bus  | 7.50 |
+PM1.0  |	Tramway  | 7|
+NO2  |	Bus  | 27.99|
+NO2  |	Magasin  | 23.66|
+NO2  |	Parc  | 24.16 |
+NO2  |	Train  | 22.94 |
+BC  |	Bus  | 27.99 |
+BC  |	Parc  | 24.16 |
+BC  |	Magasin  | 23.66 |
+
+On remarque que le restaurant est l'endroit ou il y a une grande émission de polluants PM10 et PM2.5 et moins gravement pour le PM1.0, et vient en deuxième degré la rue,bus pour PM2.5/PM10 et train pour PM1.0.
+
+Le bus, parc et magasin sont les lieu les plus importants qui produisent NO2 et BC.
+
+## Etude sur la corrélation :
+
+On essaye de voir si il y a une corrélation entre les polluants, l'humidité ,la température et les donneés de Gps, pour se faire,il faut joindre selon le time et id_participant les tables df et dfGPS.
+
+Ensuite on arrondit la partie de secondes de la colonne time à la plus proche minute pour les deux tables df et dfGPS qui contiennent les données de mesures et données GPS respectivement .
+
+Puis on élimine toutes les redondances de cette colonne dans la table dfGPS .Ces valeurs dupliquées viennent du fait que les valeurs de longitude et latitude ont été prises par rapport d'un intervalle de secondes qui n'est pas fixe.
+
+
+```{r  echo=FALSE}
+
+kable(dfGPS[1:8,], caption= "Echantillon de la table des données GPS",align=rep('c', 4),row.names = NA)
+
+```
+
+ maintenant on a la même structure des colonnes à joindre, on applique la jointure avec ce code :
+
+
+```{r  echo=TRUE}
+
+GPS_Mesures<-merge(dfGPS, df, by.x = c("participant_virtual_id","timestamp"), 
+             by.y = c("participant_virtual_id","time"), all.y = TRUE)
+```
+
+
+
+L'option all.y est en TRUE pour garder aussi les mesures qui n'ont pas de valeurs GPS car on en aura besoin pour calculer les corrélations entre les autres variables.
+
+
+```{r  echo=FALSE}
+
+kable(GPS_Mesures[417:425,1:8], caption= "Echantillon de la table de Mesures_GPS",align=rep('c', 8))
+```
+
+Sachant que la corrélation s'applique uniquement entre des variables quantitatives, on va enlever les variables qualitatives (event,activity) et on convertit NO2, BC, Humidite, Temperature en valeur numerique puisque ils sont stockés en R sous forme de character ou factor
+
+```{r  echo=TRUE}
+matriceCorr<-round(cor(Correlation, use = "complete.obs"),2)
+```
+
+use="complete.obs" afin de ne pas prendre en compte les valeurs manquantes(NA)
+
+```{r  echo=FALSE}
+kable(matriceCorr, caption= "Matrice de corrélation entre chaque pair de variables",align=rep('c', 10))
+
+```
+
+
+### Visualisation :
+
+Pour bien analyser la corrélation on va l'afficher sous forme d'un plot 
+
+```{r  echo=FALSE}
+corrplot(matriceCorr, type="upper",order="hclust", tl.col="black", tl.srt=34)
+```
+
+On constate qu'il y a plusieurs niveaux de corrélation : 
+
+* une parfaite corrélation entre les polluants
+ PM10 et PM2.5, PM10 et PM1.0, PM2.5 et PM1.0, ce qui évident puisque ils sont différents que par rapport leurs tailles, donc ils peuvent  exister au même endroit si la source de pollution en provoque.
+* Une corrélation forte entre : d'une part NO2 et BC mais il retse toujours pas intéréssent d'étudier leur dépendance vu que cela ne va pas ajouter des informations sur l'exposition des participant à ces polluants, et d'autre part entre température et humidité ce qui va permettre de donner des regressions sur des variables atmosphériques.
+* Une corrélation moyenne entre BC et les particules PM  et entre NO2 et les PM, et également entre humidité et longitude et de moins degré entre température et longitude
+* Une corrélation faible ou très faible entre latitude et humidité, latitude et NO2/BC, humidité et les autres polluants sauf NO2 qui a presque une null corrélation avec l'humidité
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

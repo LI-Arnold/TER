@@ -1,4 +1,4 @@
-"participant_virtual_id","time","PM2.5","PM10","PM1.0","Température","Humidité","NO2","BC","activity","event"
+"participant_virtual_id","time","PM2.5","PM10","PM1.0","Temperature","Humidite","NO2","BC","activity","event"
 "999994","2019-10-25 06:52:00+00","5","5","3","19.4","55.5","4",NULL,"Bureau",NULL
 "999994","2019-10-25 06:53:00+00","5","5","3","19.4","56.3","1",NULL,"Bureau",NULL
 "999994","2019-10-25 06:54:00+00","5","6","4","19.4","56","0",NULL,"Bureau",NULL

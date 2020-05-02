@@ -1,4 +1,4 @@
-"participant_virtual_id","time","PM2.5","PM10","PM1.0","Température","Humidité","NO2","BC","activity","event"
+"participant_virtual_id","time","PM2.5","PM10","PM1.0","Temperature","Humidite","NO2","BC","activity","event"
 "9999964","2019-10-19 11:00:00+00","1","1","0","19.9","55.5","86",NULL,NULL,NULL
 "9999964","2019-10-19 11:01:00+00","1","1","0","20.1","56.4","18",NULL,"Domicile","Repos"
 "9999964","2019-10-19 11:02:00+00","1","1","0","20.2","59.2","9",NULL,"Domicile","Repos"

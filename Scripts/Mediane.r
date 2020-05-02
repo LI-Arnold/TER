@@ -1,11 +1,6 @@
-library(RSQLite)
-library(gsubfn)
-library(proto) 
-library(sqldf) 
 
+source("~/TER/Scripts/initialiser.r")
 
-dataset <- lapply(Sys.glob("TER/Donnees/Measures/Participant*.csv"), read.csv, header=TRUE, sep=",")
-df <- do.call(rbind, dataset)
 sql1 ="SELECT * from df;"
 mesures_participants<-sqldf(sql1)
 

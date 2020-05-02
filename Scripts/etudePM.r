@@ -1,10 +1,6 @@
-library(RSQLite)
-library(gsubfn)
-library(proto) 
-library(sqldf) 
 
-dataset <- lapply(Sys.glob("TER/Donnees/Measures/Participant*.csv"), read.csv, header=TRUE, sep=",")
-df <- do.call(rbind, dataset)
+
+source("~/TER/Scripts/initialiser.r")
 
 questionnaire<-read.csv("questionnaire_participants.csv",header=TRUE,sep=",")
 

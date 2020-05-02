@@ -1,14 +1,10 @@
-library(RSQLite)
-library(gsubfn)
-library(proto) 
-library(sqldf)
+
 library(tidyverse)
 
-dataset <- lapply(Sys.glob("TER/Donnees/Measures/Participant*.csv"), read.csv, header=TRUE, sep=",")
-df <- do.call(rbind, dataset)
 
+source("~/TER/Scripts/initialiser.r")
 
-#~ conertir en int les valeurs de NO2 et BC
+#~ convertir en numeric les valeurs de NO2 et BC
 
 df$NO2 <- as.numeric(df$NO2)
 df$BC <- as.numeric(df$BC)		
@@ -32,6 +28,8 @@ req1 <- "SELECT participant_virtual_id
 		FROM df	
 		GROUP BY participant_virtual_id;"
  ActivitePM1.0<-sqldf(req1)
+ # Arrondir l'avg à deux chiffres après la virgule
+ ActivitePM1.0<-ActivitePM1.0 %>% mutate_if(is.numeric, round, digits=2)
  
    #~ la moyenne de PM10 par activity pour chaque participant
    
@@ -52,7 +50,7 @@ req2 <- "SELECT participant_virtual_id
 		FROM df	
 		GROUP BY participant_virtual_id;"
  ActivitePM10<-sqldf(req2)
- 
+  ActivitePM10<-ActivitePM10 %>% mutate_if(is.numeric, round, digits=2)
    #~ la moyenne de PM2.5 par activity pour chaque participant
    
 req3 <- "SELECT participant_virtual_id
@@ -72,6 +70,7 @@ req3 <- "SELECT participant_virtual_id
 		FROM df	
 		GROUP BY participant_virtual_id;"
  ActivitePM2.5<-sqldf(req3)
+ ActivitePM2.5<-ActivitePM2.5 %>% mutate_if(is.numeric, round, digits=2)
 	
 #~ la moyenne de NO2 par activity pour chaque participant
 
@@ -92,6 +91,7 @@ req4<-"SELECT participant_virtual_id
 		FROM df	
 		GROUP BY participant_virtual_id;"
  ActiviteNO2<-sqldf(req4)
+ ActiviteNO2<-ActiviteNO2 %>% mutate_if(is.numeric, round, digits=2)
  
 #~ la moyenne de BC par activity pour chaque participant
 
@@ -111,4 +111,5 @@ req5 <- "SELECT participant_virtual_id
 	 , AVG(BC) FILTER (WHERE activity = 'Tramway') BC_Tramway
 		FROM df	
 		GROUP BY participant_virtual_id;"
- ActiviteBC<-sqldf(req5)	
+ ActiviteBC<-sqldf(req5)
+ActiviteBC<-ActiviteBC %>% mutate_if(is.numeric, round, digits=2) 

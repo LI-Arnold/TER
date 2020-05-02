@@ -1,4 +1,4 @@
-"participant_virtual_id","time","PM2.5","PM10","PM1.0","Température","Humidité","NO2","BC","activity","event"
+"participant_virtual_id","time","PM2.5","PM10","PM1.0","Temperature","Humidite","NO2","BC","activity","event"
 "9999915","2019-10-19 10:24:00+00","39","39","33","21.1","70.6","0","1603","Domicile","Cuisiner"
 "9999915","2019-10-19 10:25:00+00","39","39","33","21.3","69.4","0","1816","Domicile","Cuisiner"
 "9999915","2019-10-19 10:26:00+00","37","39","33","21.4","68.9","0","1645","Domicile","Cuisiner"
