@@ -25,6 +25,7 @@ req1 <- "SELECT participant_virtual_id
 	 , AVG(\"PM1.0\") FILTER (WHERE activity = 'Parc') 'PM1.0_Parc'
 	 , AVG(\"PM1.0\") FILTER (WHERE activity = 'CinÃ©ma') 'PM1.0_Cinéma'
 	 , AVG(\"PM1.0\") FILTER (WHERE activity = 'Tramway') 'PM1.0_Tramway'
+	 , AVG(\"PM1.0\") FILTER (WHERE activity = 'Inconnu') 'PM1.0_Inconnu'
 		FROM df	
 		GROUP BY participant_virtual_id;"
  ActivitePM1.0<-sqldf(req1)
@@ -47,6 +48,7 @@ req2 <- "SELECT participant_virtual_id
 	 , AVG(\"PM10\") FILTER (WHERE activity = 'Parc') PM10_Parc
 	 , AVG(\"PM10\") FILTER (WHERE activity = 'CinÃ©ma') PM10_Cinéma
 	 , AVG(\"PM10\") FILTER (WHERE activity = 'Tramway') PM10_Tramway
+	 , AVG(\"PM10\") FILTER (WHERE activity = 'Inconnu') PM10_Inconnu
 		FROM df	
 		GROUP BY participant_virtual_id;"
  ActivitePM10<-sqldf(req2)
@@ -67,6 +69,7 @@ req3 <- "SELECT participant_virtual_id
 	 , AVG(\"PM2.5\") FILTER (WHERE activity = 'Parc') 'PM2.5_Parc'
 	 , AVG(\"PM2.5\") FILTER (WHERE activity = 'CinÃ©ma') 'PM2.5_Cinéma'
 	 , AVG(\"PM2.5\") FILTER (WHERE activity = 'Tramway') 'PM2.5_Tramway'
+	 , AVG(\"PM2.5\") FILTER (WHERE activity = 'Inconnu') 'PM2.5_Inconnu'
 		FROM df	
 		GROUP BY participant_virtual_id;"
  ActivitePM2.5<-sqldf(req3)
@@ -88,6 +91,7 @@ req4<-"SELECT participant_virtual_id
 	 , AVG(NO2) FILTER (WHERE activity = 'Parc') NO2_Parc
 	 , AVG(NO2) FILTER (WHERE activity = 'CinÃ©ma') NO2_Cinema
 	 , AVG(NO2) FILTER (WHERE activity = 'Tramway') NO2_Tramway
+	 , AVG(NO2) FILTER (WHERE activity = 'Inconnu') NO2_Inconnu
 		FROM df	
 		GROUP BY participant_virtual_id;"
  ActiviteNO2<-sqldf(req4)
@@ -109,6 +113,7 @@ req5 <- "SELECT participant_virtual_id
 	 , AVG(BC) FILTER (WHERE activity = 'Parc') BC_Parc
 	 , AVG(BC) FILTER (WHERE activity = 'CinÃ©ma') BC_Cinéma
 	 , AVG(BC) FILTER (WHERE activity = 'Tramway') BC_Tramway
+	 , AVG(BC) FILTER (WHERE activity = 'Inconnu') BC_Inconnu
 		FROM df	
 		GROUP BY participant_virtual_id;"
  ActiviteBC<-sqldf(req5)
