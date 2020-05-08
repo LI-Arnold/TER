@@ -7,7 +7,6 @@ Domicile;Fumer
 Domicile;Arrêter De Cuisiner
 Domicile;Allumage De Cheminée
 Domicile;Repos
-Domicile;Marcher
 Domicile;NULL
 Bureau;Repos
 Bureau;Fermeture De Fenêtre
@@ -16,30 +15,23 @@ Bureau;NULL
 Bureau;Fumer
 Magasin;Repos
 Magasin;Marcher
-Magasin;Sport
 Magasin;NULL
 Restaurant;Cuisiner
-Restaurant;Marcher
 Restaurant;NULL
 Restaurant;Repos
 Restaurant;Fermeture De Fenêtre
 Restaurant;Ouverture De Fenêtre
-Restaurant;Marcher
-Cinéma;Fermeture De Fenêtre
-Cinéma;Ouverture De Fenêtre
 Cinéma;Repos
 Cinéma;NULL
 Gare;NULL
 Gare;Repos
-Gare;Fermeture De Fenêtre
-Gare;Ouverture De Fenêtre
 Gare;Marcher
 Rue;Repos
 Rue;NULL
 Rue;Marcher
 Rue;promenade avec chien
 Rue;Fumer
-Rue;course �  pied
+Rue;course à pied
 Rue;Sport
 Parc;Marcher
 Parc;Repos
@@ -65,33 +57,26 @@ Inconnu;Marcher
 Inconnu;promenade avec chien
 Inconnu;Repos
 Inconnu;course à pied
+Inconnu;Fumer
+Inconnu;Cuisiner
+Inconnu;Arrêter De Cuisiner
 Inconnu;Sport
+Inconnu;Fermeture De Fenêtre
+Inconnu;Ouverture De Fenêtre
 Voiture;Fermeture De Fenêtre
 Voiture;Ouverture De Fenêtre
 Voiture;Fumer
 Voiture;Repos
 Voiture;NULL
-Métro;Fermeture De Fenêtre
-Métro;Ouverture De Fenêtre
 Métro;Repos
 Métro;Marcher
 Métro;NULL
-Bus;Fermeture De Fenêtre
-Bus;Ouverture De Fenêtre
 Bus;Repos
-Bus;Marcher
 Bus;NULL
-Moto;Repos
 Moto;NULL
 Vélo;NULL
-Vélo;Repos
-Tramway;Fermeture De Fenêtre
-Tramway;Ouverture De Fenêtre
 Tramway;Repos
-Tramway;Marcher
 Tramway;NULL
-Train;Fermeture De Fenêtre
-Train;Ouverture De Fenêtre
 Train;Repos
 Train;Marcher
 Train;NULL

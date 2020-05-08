@@ -20,16 +20,16 @@ load("~/TER/Workspace.RData")
 ```
 
 
-## Etude sur la fiabilité de Activité_évènement :
+## Etude sur la fiabilité de Activité_événement :
 
-Pour avoir des idées sur les anomalies activité_évènement et combien de fois apparaissent dans les données, on calcule le nombre de toutes les associations possibles:
+Pour avoir des idées sur les anomalies activité_événement et combien de fois apparaissent dans les données, on calcule le nombre de toutes les associations possibles:
 
 
 ```{r  echo=FALSE}
-kable(NbrMatch[1:10, ], caption= "Extrait de correspondances avitivité_évènement avant l'identification des anomalies",align=rep('c', 4))
+kable(NbrMatch[1:10, ], caption= "Extrait de correspondances avitivité_événement avant l'identification des anomalies",align=rep('c', 4))
 ```
 
-Après qu'on a créé un fichier csv et on l'a rempli manuellement avec toutes les associations possibles et logiques entre l'activité et évènement, puis on a importé dans un dataframe pour exécuter une requête NOT EXISTS qui va permettre de retourner toutes les anomalies sur les données.
+Après qu'on a créé un fichier csv et on l'a rempli manuellement avec toutes les associations possibles et logiques entre l'activité et événement, puis on a importé dans un dataframe pour exécuter une requête NOT EXISTS qui va permettre de retourner toutes les anomalies sur les données.
 
 Nombre total d'anomalies s'élève à 58046 tenant compte des cas qui peuvent être un peu logiques, pourtant on les a compté parmi les anomalies.
 
@@ -51,7 +51,7 @@ Le tableau suivant montre le nombre d'anomalies pour chaque activity/event
 ```{r  echo=FALSE}
 requete<-"select activity,event,count(*) as Nombre_occurrences from AnomaliesActivityEvent group by activity,event;"
  NbrAnomalies<-sqldf(requete)
-kable(NbrAnomalies, caption= "Les anomalies entre Activité et évènement",align=rep('c', 3))
+kable(NbrAnomalies, caption= "Les anomalies entre Activité et événement",align=rep('c', 3))
 ```
 
 
