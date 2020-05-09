@@ -163,6 +163,37 @@ sql13 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 
 p9999946 <-sqldf(sql13)
 
+#~ requête qui montre la moyenne des PM du participant 9999964 en fonction des differente activity
+sql19 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+		FROM df, questionnaire
+		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
+		AND df.participant_virtual_id = '9999964'
+		AND activity != 'NULL';
+		GROUP BY activity"
+
+p9999964 <-sqldf(sql19)
+
+#~ requête qui montre la moyenne des PM du participant 9999965 en fonction des differente activity
+sql20 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+		FROM df, questionnaire
+		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
+		AND df.participant_virtual_id = '9999965'
+		AND activity != 'NULL';
+		GROUP BY activity"
+
+p9999965 <-sqldf(sql20)
+
+#~ requête qui montre la moyenne des PM du participant 9999966 en fonction des differente activity
+sql21 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+		FROM df, questionnaire
+		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
+		AND df.participant_virtual_id = '9999966'
+		AND activity != 'NULL';
+		GROUP BY activity"
+
+p9999966 <-sqldf(sql21)
+
+#~ requête qui affiche les participant sportif ou non 
 sql14 ="SELECT  df.participant_virtual_id AS Participant,
         CASE 
         WHEN \"q_17.1\"='jamais'  THEN 'Non sportif' 
@@ -174,6 +205,7 @@ sql14 ="SELECT  df.participant_virtual_id AS Participant,
 		
 sportif <- sqldf(sql14)
 
+#~ requête qui affiche les participant sensible ou non 
 sql16 ="SELECT  df.participant_virtual_id AS Participant,
 		CASE
 		WHEN  q_48_1='Oui' or q_48_2='Oui' or q_48_3='Oui' or q_48_4='Oui' or q_48_5='Oui' or q_48_6='Oui' or q_48_7='Oui' or q_48_8='Oui' or q_48_9='Oui' or q_49_1='Oui' or q_49_2='Oui' or q_49_3='Oui' or q_49_4='Oui' or q_49_5='Oui' or q_49_6='Oui' or q_49_7='Oui' or q_49_8='Oui' or q_49_9='Oui' 
@@ -186,6 +218,7 @@ sql16 ="SELECT  df.participant_virtual_id AS Participant,
 		
 sensible <- sqldf(sql16)
 
+#~ requête qui affiche les participant avec leurs catégorie d'age ou non 
 sql17 ="SELECT  df.participant_virtual_id AS Participant,
 		CASE	
 		WHEN  q_59_1<1995 and q_59_1>1985
@@ -202,6 +235,7 @@ sql17 ="SELECT  df.participant_virtual_id AS Participant,
 		
 age<- sqldf(sql17)
 
+#~ requête qui affiche le sexe du participant 
 sql18 ="SELECT   df.participant_virtual_id AS Participant,
 		CASE	
 		WHEN  q_58='Un homme'
