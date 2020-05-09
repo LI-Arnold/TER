@@ -1,0 +1,36 @@
+---
+title: "Participant_polluant"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r warning=FALSE,echo=FALSE}
+library(ggplot2)
+library(knitr)
+load("/home/user/Bureau/TER/WorkspaceEtudePM.RData")
+```
+
+```{r warning=FALSE,echo=FALSE}
+kable(p9999932, caption = "Table des moyenne de polluant en fonction des activités du participant 9999932")
+
+```{r warning=FALSE,echo=FALSE}
+kable(p9999944, caption = "Table des moyenne de polluant en fonction des activités du participant 9999944")
+```
+
+```{r warning=FALSE,echo=FALSE}
+kable(p9999946, caption = "Table des moyenne de polluant en fonction des activités du participant 9999946")
+```
+
+```{r warning=FALSE,echo=FALSE}
+kable(p9999964, caption = "Table des moyenne de polluant en fonction des activités du participant 9999932")
+```
+
+```{r warning=FALSE,echo=FALSE}
+kable(p9999965, caption = "Table des moyenne de polluant en fonction des activités du participant 9999932")
+```
+
+```{r warning=FALSE,echo=FALSE}
+kable(p9999966, caption = "Table des moyenne de polluant en fonction des activités du participant 9999932")
+```
+```

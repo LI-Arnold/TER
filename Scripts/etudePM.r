@@ -1,17 +1,16 @@
 
 
-source("~/TER/Scripts/initialiser.r")
+source("initialiser.r")
 
-questionnaire<-read.csv("questionnaire_participants.csv",header=TRUE,sep=",")
+questionnaire<-read.csv("/home/user/Bureau/TER/Donnees/questionnaire_participants.csv",header=TRUE,sep=",")
 
 #~ requête qui montre la moyenne des PM en fonction des differente activity
 
 sql0 = "SELECT activity, ROUND(avg(\"PM2.5\"),2) AS 'MOY_PM2.5',ROUND(stdev(\"PM2.5\"),2) as 'Ecart(PM2.5)' , ROUND(avg(PM10),2) as 'MOY_PM10' ,ROUND(stdev(\"PM10\"),2) as 'Ecart(PM10)',ROUND(avg(\"PM1.0\"),2) as 'MOY_PM1.0',ROUND(stdev(\"PM1.0\"),2) as 'Ecart(PM1.0)',ROUND(avg(NO2),2) as 'MOY_NO2',ROUND(stdev(NO2),2) as 'Ecart(NO2)',ROUND(avg(BC),2) as 'MOY_BC',ROUND(stdev(BC),2) as 'Ecart(BC)'
-
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
-		AND activity != 'NULL';
-		GROUP BY activity"
+		AND activity != 'NULL'
+		GROUP BY activity;"
 		
 activity<-sqldf(sql0)
 		
@@ -20,8 +19,8 @@ sql1 = "SELECT activity, event , avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'M
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND activity = 'Domicile'
-		AND event != 'NULL';
-		GROUP BY event"
+		AND event != 'NULL'
+		GROUP BY event;"
 
 Domicile<-sqldf(sql1)
 
@@ -30,8 +29,8 @@ sql2 = "SELECT activity, event , avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'M
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND activity = 'Rue'
-		AND event != 'NULL';
-		GROUP BY event"
+		AND event != 'NULL'
+		GROUP BY event;"
 
 Rue<-sqldf(sql2)
 
@@ -40,8 +39,8 @@ sql3 = "SELECT activity, event , avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'M
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND activity = 'Restaurant'
-		AND event != 'NULL';
-		GROUP BY event"
+		AND event != 'NULL'
+		GROUP BY event;"
 
 Restaurant<-sqldf(sql3)
 
@@ -50,8 +49,8 @@ sql4 = "SELECT activity, event , avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'M
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND activity = 'Bureau'
-		AND event != 'NULL';
-		GROUP BY event"
+		AND event != 'NULL'
+		GROUP BY event;"
 
 Bureau <-sqldf(sql4)
 
@@ -76,8 +75,8 @@ sql6 = "SELECT activity, event , avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'M
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND activity = 'Vélo'
-		AND event != 'NULL';
-		GROUP BY event"
+		AND event != 'NULL'
+		GROUP BY event;"
 
 Velo <-sqldf(sql6)
 
@@ -86,8 +85,8 @@ sql7 = "SELECT activity, event , avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'M
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND activity = 'Voiture'
-		AND event != 'NULL';
-		GROUP BY event"
+		AND event != 'NULL'
+		GROUP BY event;"
 
 Voiture <-sqldf(sql7)
 
@@ -95,8 +94,8 @@ Voiture <-sqldf(sql7)
 sql8 = "SELECT df.participant_virtual_id AS Participant, avg(\"PM2.5\") AS 'MOY_PM2.5',avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0',avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
-		AND activity != 'NULL';
-		GROUP BY df.participant_virtual_id"
+		AND activity != 'NULL'
+		GROUP BY df.participant_virtual_id;"
 		
 moy_participant<-sqldf(sql8)
 
@@ -104,8 +103,8 @@ moy_participant<-sqldf(sql8)
 sql9 = "SELECT df.participant_virtual_id AS Participant, ROUND(stdev(\"PM2.5\"),2) as 'Ecart(PM2.5)' ,ROUND(stdev(\"PM10\"),2) as 'Ecart(PM10)',ROUND(stdev(\"PM1.0\"),2) as 'Ecart(PM1.0)',ROUND(stdev(NO2),2) as 'Ecart(NO2)',ROUND(stdev(BC),2) as 'Ecart(BC)'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
-		AND activity != 'NULL';
-		GROUP BY df.participant_virtual_id"
+		AND activity != 'NULL'
+		GROUP BY df.participant_virtual_id;"
 		
 ecart_moy<-sqldf(sql9)
 
@@ -114,8 +113,8 @@ sql10 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999932'
-		AND activity != 'NULL';
-		GROUP BY activity"
+ 		AND df.activity != 'NULL'
+		GROUP BY activity;"
 
 p9999932 <-sqldf(sql10)
 
@@ -124,8 +123,8 @@ sql10 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999932'
-		AND activity != 'NULL';
-		GROUP BY activity"
+		AND activity != 'NULL'
+		GROUP BY activity;"
 
 p9999932 <-sqldf(sql10)
 
@@ -138,7 +137,8 @@ sql11 = "SELECT activity, avg(BC) as 'MOY_BC'
 		SELECT activity, avg(BC) as 'MOY_BC'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
-		AND activity = 'NULL';
+		AND activity = 'NULL'
+		GROUP BY activity
 		HAVING AVG(BC)= '0' "
 
 BC <-sqldf(sql11)
@@ -148,8 +148,8 @@ sql12 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999944'
-		AND activity != 'NULL';
-		GROUP BY activity"
+		AND activity != 'NULL'
+		GROUP BY activity;"
 
 p9999944 <-sqldf(sql12)
 
@@ -158,8 +158,8 @@ sql13 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999946'
-		AND activity != 'NULL';
-		GROUP BY activity"
+		AND activity != 'NULL'
+		GROUP BY activity;"
 
 p9999946 <-sqldf(sql13)
 
@@ -168,8 +168,8 @@ sql19 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999964'
-		AND activity != 'NULL';
-		GROUP BY activity"
+		AND activity != 'NULL'
+		GROUP BY activity;"
 
 p9999964 <-sqldf(sql19)
 
@@ -178,8 +178,8 @@ sql20 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999965'
-		AND activity != 'NULL';
-		GROUP BY activity"
+		AND activity != 'NULL'
+		GROUP BY activity;"
 
 p9999965 <-sqldf(sql20)
 
@@ -188,8 +188,8 @@ sql21 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999966'
-		AND activity != 'NULL';
-		GROUP BY activity"
+		AND activity != 'NULL'
+		GROUP BY activity;"
 
 p9999966 <-sqldf(sql21)
 
@@ -201,7 +201,7 @@ sql14 ="SELECT  df.participant_virtual_id AS Participant,
 		END	as  Categorie
 		FROM questionnaire,df 
 		WHERE questionnaire.participant_virtual_id = df.participant_virtual_id AND \"q_17.1\" IS NOT NULL
-		GROUP BY df.participant_virtual_id"
+		GROUP BY df.participant_virtual_id;"
 		
 sportif <- sqldf(sql14)
 
