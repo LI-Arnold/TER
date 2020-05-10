@@ -1,0 +1,41 @@
+---
+title: ' Polluant_environnement'
+author: "null"
+date: "null"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(plotly)
+library(plyr)
+library(sqldf)
+set.seed(333)
+
+load("~/TER/WorkspacePlots.RData")
+```
+
+## Polluant par rapport activité :
+
+```{r  warning=FALSE,echo=FALSE,}
+
+piePM10Activity
+piePM2.5Activity
+ piePM1.0Activity
+
+```
+
+## Polluant par rapport événement :
+
+```{r  warning=FALSE,echo=FALSE,}
+
+piePM10Event
+piePM2.5Event
+ piePM1.0Event
+ pieNO2Event
+ pieBCEvent
+
+```

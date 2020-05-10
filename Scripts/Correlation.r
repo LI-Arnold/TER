@@ -4,7 +4,7 @@ library(dplyr)
  
 source("~/TER/Scripts/initialiser.r")
 
-### changement de format de factor à time(POSIXc
+### changement de format de factor à time(POSIXct)
 df$time <- as.POSIXlt(df$time)
 
 ### Enlever la partie secondes
@@ -40,7 +40,7 @@ GPS_Mesures$NO2<-as.numeric(GPS_Mesures$NO2)
 GPS_Mesures$BC<-as.numeric(GPS_Mesures$BC)
 
 ###  selection les colonnes avec des valeurs numeric 
-Correlation<-GPS_Mesures[,3:11]
+	<-GPS_Mesures[,3:11]
 
 ### Matrice de correlation 
 matriceCorr<-round(cor(Correlation, use = "complete.obs"),2)

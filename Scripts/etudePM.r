@@ -7,10 +7,10 @@ questionnaire<-read.csv("/home/user/Bureau/TER/Donnees/questionnaire_participant
 #~ requête qui montre la moyenne des PM en fonction des differente activity
 
 sql0 = "SELECT activity, ROUND(avg(\"PM2.5\"),2) AS 'MOY_PM2.5',ROUND(stdev(\"PM2.5\"),2) as 'Ecart(PM2.5)' , ROUND(avg(PM10),2) as 'MOY_PM10' ,ROUND(stdev(\"PM10\"),2) as 'Ecart(PM10)',ROUND(avg(\"PM1.0\"),2) as 'MOY_PM1.0',ROUND(stdev(\"PM1.0\"),2) as 'Ecart(PM1.0)',ROUND(avg(NO2),2) as 'MOY_NO2',ROUND(stdev(NO2),2) as 'Ecart(NO2)',ROUND(avg(BC),2) as 'MOY_BC',ROUND(stdev(BC),2) as 'Ecart(BC)'
-		FROM df, questionnaire
-		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
-		AND activity != 'NULL'
-		GROUP BY activity;"
+
+
+		FROM df WHERE activity != 'NULL';"
+
 		
 activity<-sqldf(sql0)
 		

@@ -1,8 +1,12 @@
 ---
-title: "Rapport"
-author: "Polluscope"
-date: "19/03/2020"
-output: html_document
+title: "Rapport 1"
+author: 
+date: 
+output:
+  pdf_document: default
+  word_document: default
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +17,7 @@ library(plyr)
 library(sqldf)
 library(flexdashboard)
 set.seed(955)
-load("~/environnement.RData")
+load("~/TER/WorkspaceStatsCategorie.RData")
 ```
 ## Anomalies : 
   * Les participant qui ont répondu plusieurs fois au questionnaire :    
@@ -64,102 +68,307 @@ la variance est de `r var(df$PM10) `
 * PM1.0
 ```{r  warning=FALSE,echo=FALSE}
 summary(df$PM1.0)
+
 ```
 la variance est de `r var(df$PM1.0) `  
 
 ## Plots :  
 
 ```{r  warning=FALSE,echo=FALSE}
-c <-  ggplot(data=resultatFinal, aes(x=MOY_PM2.5,y=Categorie)) + 
-     geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2), col="red", aes(fill=..x..)) +
-    scale_fill_gradient("PM2.5", low="green", high="red")+labs(x="Moyenne de PM2.5",y="Catégorie")+ggtitle("Moyenne de PM2.5 par rapport la catégorie")
+ggplot(data=PolluantParCategorie, aes(x=MOY_PM2.5,y=Categorie)) + 
+     geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2), col="green",bandwidth=4) +labs(x="Moyenne de PM2.5",y="Catégorie")+ggtitle("Moyenne de PM2.5 par rapport la catégorie")
 
-ggplotly(c)
+
 ```
+
 On voit que le degré de PM2.5 est plus élevé chez les non sportifs et les personnes ayant l'age entre 35 et 50 et plus bas chez les personnes avec des revenus moins de 2000
 
+```{r  warning=FALSE,echo=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4}
+colors <- c("#55DDE0", "#33658A", "#77B5FE","#F6AE2D", "#F26419","#2F4858")
+
+ggplot(resultat1, aes(x="", y=MOY_PM2.5, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM2.5/ sum(MOY_PM2.5))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+resultat2et3<-rbind(resultat2,resultat3)
+ggplot(resultat2et3, aes(x="", y=MOY_PM2.5, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM2.5/ sum(MOY_PM2.5))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y",start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat4, aes(x="", y=MOY_PM2.5, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM2.5/ sum(MOY_PM2.5))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat5, aes(x="", y=MOY_PM2.5, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM2.5/ sum(MOY_PM2.5))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat6, aes(x="", y=MOY_PM2.5, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM2.5/ sum(MOY_PM2.5))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat7, aes(x="", y=MOY_PM2.5, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM2.5/ sum(MOY_PM2.5))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat9, aes(x="", y=MOY_PM2.5, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM2.5/ sum(MOY_PM2.5))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y",start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat10, aes(x="", y=MOY_PM2.5, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM2.5/ sum(MOY_PM2.5))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+
+```
+
+Produit du polluant PM2.5 selon chaque type de catégorie (Sport, transport, revenu,sensibilité à la pollution...etc)
+
 ```{r  warning=FALSE,echo=FALSE}
-p <-  ggplot(data=resultatFinal, aes(x=MOY_PM10,y=Categorie)) + 
+ ggplot(data=PolluantParCategorie, aes(x=MOY_PM10,y=Categorie)) + 
      geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2), col="red", 
                     aes(fill=..x..)) +
     scale_fill_gradient("PM10", low="green", high="red")+
   labs(x="PM10",y="Catégorie")+ggtitle("Moyenne de PM10 par rapport la catégorie")
 
-ggplotly(p)
+
 ```
 
 le PM10 très élevé pour les non sportifs et les personnes dont l'age est entre 35 et 50 et légèrement chez les exposés à la fumee.
 
+
+```{r  warning=FALSE,echo=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4}
+
+
+ggplot(resultat1, aes(x="", y=MOY_PM10, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM10/ sum(MOY_PM10))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+resultat2et3<-rbind(resultat2,resultat3)
+ggplot(resultat2et3, aes(x="", y=MOY_PM10, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM10/ sum(MOY_PM10))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat4, aes(x="", y=MOY_PM10, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM10/ sum(MOY_PM10))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat5, aes(x="", y=MOY_PM10, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM10/ sum(MOY_PM10))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat6, aes(x="", y=MOY_PM10, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM10/ sum(MOY_PM10))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat7, aes(x="", y=MOY_PM10, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM10/ sum(MOY_PM10))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat9, aes(x="", y=MOY_PM10, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM10/ sum(MOY_PM10))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y",start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat10, aes(x="", y=MOY_PM10, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM10/ sum(MOY_PM10))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+
+```
+
+Produit du polluant PM10 selon chaque type de catégorie
+
 ```{r warning=FALSE,echo=FALSE}
 
-p <-  ggplot(data=resultatFinal, aes(x=MOY_PM1.0,y=Categorie)) +
-     geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),   col="red", aes(fill=..x..)) +
-    scale_fill_gradient("PM1.0", low="green", high="red")+ labs(x="Moyenne de PM1.0",y="Catégorie")+
-ggtitle("Moyenne de PM1.0 par rapport la catégorie")
-ggplotly(p)
+ ggplot(data=PolluantParCategorie, aes(x=MOY_PM1.0,y=Categorie)) +
+     geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2), ) + labs(x="Moyenne de PM1.0",y="Catégorie")+ggtitle("Moyenne de PM1.0 par rapport la catégorie")
+
 ```
+
 le PM10 très élevé pour les non sportifs et les personnes dont l'age est entre 35 et 50 et légèrement chez les exposés à la fumee.  
 les moins exposés à PM1.0 sont les jeunes moins de 20 ans et les participants ayant le revenu moins de 2000.
 
+
+```{r  warning=FALSE,echo=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4}
+colors <- c("#55DDE0", "#33658A", "#F6AE2D", "#F26419","#2F4858")
+
+ggplot(resultat1, aes(x="", y=MOY_PM1.0, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM1.0/ sum(MOY_PM1.0))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+resultat2et3<-rbind(resultat2,resultat3)
+ggplot(resultat2et3, aes(x="", y=MOY_PM1.0, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM1.0/ sum(MOY_PM1.0))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat4, aes(x="", y=MOY_PM1.0, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM1.0/ sum(MOY_PM1.0))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat5, aes(x="", y=MOY_PM1.0, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM1.0/ sum(MOY_PM1.0))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat6, aes(x="", y=MOY_PM1.0, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM1.0/ sum(MOY_PM1.0))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat7, aes(x="", y=MOY_PM1.0, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM1.0/ sum(MOY_PM1.0))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat9, aes(x="", y=MOY_PM1.0, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM1.0/ sum(MOY_PM1.0))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y",start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat10, aes(x="", y=MOY_PM1.0, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_PM1.0/ sum(MOY_PM1.0))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+
+```
+
+Produit du polluant PM1.0 selon chaque type de catégorie
+
 ```{r warning=FALSE,echo=FALSE}
 
-p <-  ggplot(data=resultatFinal, aes(x=MOY_NO2,y=Categorie)) + 
-     geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),   col="red",  aes(fill=..x..)) +
-    scale_fill_gradient("NO2", low="green", high="red")+labs(x="Moyenne de NO2",y="Catégorie")+
+ ggplot(data=PolluantParCategorie, aes(x=MOY_NO2,y=Categorie)) + 
+     geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2)) +labs(x="Moyenne de NO2",y="Catégorie")+
     ggtitle("Moyenne de NO2 par rapport la catégorie")
-ggplotly(p)
+
 ```
+
 NO2 est très élevé pour les non sportifs et les personnes dont l'age est entre 35 et 50 et légèrement chez les exposés à la fumee.  
 les moins exposés à l'NO2 sont les locataires.
+
+
+```{r  warning=FALSE,echo=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4}
+colors <- c("#55DDE0", "#33658A", "#F6AE2D", "#F26419","#2F4858")
+
+ggplot(resultat1, aes(x="", y=MOY_NO2, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_NO2/ sum(MOY_NO2))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+resultat2et3<-rbind(resultat2,resultat3)
+ggplot(resultat2et3, aes(x="", y=MOY_NO2, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_NO2/ sum(MOY_NO2))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat4, aes(x="", y=MOY_NO2, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_NO2/ sum(MOY_NO2))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat5, aes(x="", y=MOY_NO2, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_NO2/ sum(MOY_NO2))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat6, aes(x="", y=MOY_NO2, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_NO2/ sum(MOY_NO2))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat7, aes(x="", y=MOY_NO2, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_NO2/ sum(MOY_NO2))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat9, aes(x="", y=MOY_NO2, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_NO2/ sum(MOY_NO2))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y",start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat10, aes(x="", y=MOY_NO2, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_NO2/ sum(MOY_NO2))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+
+```
+
+Produit du polluant NO2 selon chaque type de catégorie
+
 ```{r warning=FALSE,echo=FALSE}
 
-p <-  ggplot(data=resultatFinal, aes(x=MOY_BC,y=Categorie)) + 
-     geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),   col="red", aes(fill=..x..)) +
-    scale_fill_gradient("BC", low="green", high="red")+
+ ggplot(data=PolluantParCategorie, aes(x=MOY_BC,y=Categorie)) + 
+     geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2)) +
   labs(x="Moyenne de BC",y="Catégorie")+
     ggtitle("Moyenne de BC par rapport la catégorie")
-ggplotly(p)
+
 ```
+
 + on apercoit que le niveau de bc est moins important pour ceux qui prennent le transport en commun par rapport à ceux qui ne le prennent du tout ou utilisent les moyens doux(vélo trottinette)
 
+
+```{r  warning=FALSE,echo=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4}
+colors <- c("#55DDE0", "#33658A", "#F6AE2D", "#F26419","#2F4858")
+
+ggplot(resultat1, aes(x="", y=MOY_BC, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_BC/ sum(MOY_BC))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+resultat2et3<-rbind(resultat2,resultat3)
+ggplot(resultat2et3, aes(x="", y=MOY_BC, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_BC/ sum(MOY_BC))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat4, aes(x="", y=MOY_BC, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_BC/ sum(MOY_BC))) , position = position_stack(vjust = 0.5)) +
+     labs( fill="",x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat5, aes(x="", y=MOY_BC, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_BC/ sum(MOY_BC))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat6, aes(x="", y=MOY_BC, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_BC/ sum(MOY_BC))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat7, aes(x="", y=MOY_BC, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_BC/ sum(MOY_BC))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat9, aes(x="", y=MOY_BC, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_BC/ sum(MOY_BC))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y",start=0)+scale_fill_manual(values = colors)
+
+ggplot(resultat10, aes(x="", y=MOY_BC, fill=Categorie))+
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * MOY_BC/ sum(MOY_BC))) , position = position_stack(vjust = 0.5)) +
+     labs(fill="", x = NULL, y = NULL) +  coord_polar(theta="y", start=0)+scale_fill_manual(values = colors)
+
+
+```
+
+Produit du polluant BC selon chaque type de catégorie
+
 ```{r warning=FALSE,echo=FALSE}
 
-p <-  ggplot(data=activity, aes(x=activity,y=MOY_BC)) + 
+ ggplot(data=activity, aes(x=activity,y=MOY_BC)) + 
      geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),bandwidth=8) +ggtitle("Moyenne de BC en fontion de l'acitivité")
-ggplotly(p)
+
 ```
 
 
 ```{r warning=FALSE,echo=FALSE}
 
-p <-  ggplot(data=activity, aes(x=activity,y=MOY_PM2.5)) + 
+  ggplot(data=activity, aes(x=activity,y=MOY_PM2.5)) + 
      geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),bandwidth=8) +ggtitle("Moyenne de PM2.5 en fontion de l'acitivité")
-ggplotly(p)
+
 ```
 
 
 
 ```{r warning=FALSE,echo=FALSE}
 
-p <-  ggplot(data=activity, aes(x=activity,y=MOY_PM10)) + 
+ggplot(data=activity, aes(x=activity,y=MOY_PM10)) + 
      geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),bandwidth=8) +ggtitle("Moyenne de PM10 en fontion de l'acitivité")
-ggplotly(p)
+
 ```
 
 Pour le PM10, c'est au Restaurant qu'ait le plus touché également
 
 ```{r warning=FALSE,echo=FALSE}
 
-p <-  ggplot(data=activity, aes(x=activity,y=MOY_PM1.0)) + 
+  ggplot(data=activity, aes(x=activity,y=MOY_PM1.0)) + 
      geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),bandwidth=8) +ggtitle("Moyenne de PM1.0 en fontion de l'acitivité")
-ggplotly(p)
+
 
 ```
 ```{r warning=FALSE,echo=FALSE}
 
-p <-  ggplot(data=activity, aes(x=activity,y=MOY_NO2)) + 
+ ggplot(data=activity, aes(x=activity,y=MOY_NO2)) + 
      geom_histogram(alpha=0.8,stat='identity',breaks=seq(20, 50, by=2),bandwidth=8) +ggtitle("Moyenne de NO2 en fontion de l'acitivité")
-ggplotly(p)
+
 ```
 
 Pour le NO2, c'est surtout toutes les activités à l'extérieur qui sont le plus exposés
