@@ -109,7 +109,7 @@ sql9 = "SELECT df.participant_virtual_id AS Participant, ROUND(stdev(\"PM2.5\"),
 ecart_moy<-sqldf(sql9)
 
 #~ requête qui montre la moyenne des PM du participant 9999932 en fonction des differente activity
-sql10 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+sql10 = "SELECT activity, round(avg(\"PM2.5\"),2) AS 'MOY_PM2.5' , round(avg(PM10),2) as 'MOY_PM10' ,round(avg(\"PM1.0\"),2) as 'MOY_PM1.0', round(avg(NO2),2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999932'
@@ -119,7 +119,7 @@ sql10 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 p9999932 <-sqldf(sql10)
 
 #~ requête qui montre la moyenne des PM du participant 9999932 en fonction des differente activity
-sql10 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+sql10 = "SELECT activity, round(avg(\"PM2.5\"),2) AS 'MOY_PM2.5' , round(avg(PM10),2) as 'MOY_PM10' ,round(avg(\"PM1.0\"),2) as 'MOY_PM1.0', round(avg(NO2),2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999932'
@@ -144,7 +144,7 @@ sql11 = "SELECT activity, avg(BC) as 'MOY_BC'
 BC <-sqldf(sql11)
 
 #~ requête qui montre la moyenne des PM du participant 9999944 en fonction des differente activity
-sql12 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+sql12 = "SELECT activity, round(avg(\"PM2.5\"),2) AS 'MOY_PM2.5' , round(avg(PM10),2) as 'MOY_PM10' ,round(avg(\"PM1.0\"),2) as 'MOY_PM1.0', round(avg(NO2),2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999944'
@@ -154,7 +154,7 @@ sql12 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 p9999944 <-sqldf(sql12)
 
 #~ requête qui montre la moyenne des PM du participant 9999946 en fonction des differente activity
-sql13 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+sql13 = "SELECT activity, round(avg(\"PM2.5\"),2) AS 'MOY_PM2.5' , round(avg(PM10),2) as 'MOY_PM10' ,round(avg(\"PM1.0\"),2) as 'MOY_PM1.0', round(avg(NO2),2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999946'
@@ -164,7 +164,7 @@ sql13 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 p9999946 <-sqldf(sql13)
 
 #~ requête qui montre la moyenne des PM du participant 9999964 en fonction des differente activity
-sql19 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+sql19 = "SELECT activity, round(avg(\"PM2.5\"),2) AS 'MOY_PM2.5' , round(avg(PM10),2) as 'MOY_PM10' ,round(avg(\"PM1.0\"),2) as 'MOY_PM1.0', round(avg(NO2),2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999964'
@@ -174,7 +174,7 @@ sql19 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 p9999964 <-sqldf(sql19)
 
 #~ requête qui montre la moyenne des PM du participant 9999965 en fonction des differente activity
-sql20 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+sql20 = "SELECT activity, round(avg(\"PM2.5\"),2) AS 'MOY_PM2.5' , round(avg(PM10),2) as 'MOY_PM10' ,round(avg(\"PM1.0\"),2) as 'MOY_PM1.0', round(avg(NO2),2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999965'
@@ -184,7 +184,7 @@ sql20 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10
 p9999965 <-sqldf(sql20)
 
 #~ requête qui montre la moyenne des PM du participant 9999966 en fonction des differente activity
-sql21 = "SELECT activity, avg(\"PM2.5\") AS 'MOY_PM2.5' , avg(PM10) as 'MOY_PM10' ,avg(\"PM1.0\") as 'MOY_PM1.0', avg(NO2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
+sql21 = "SELECT activity, round(avg(\"PM2.5\"),2) AS 'MOY_PM2.5' , round(avg(PM10),2) as 'MOY_PM10' ,round(avg(\"PM1.0\"),2) as 'MOY_PM1.0', round(avg(NO2),2) as 'MOY_NO2',avg(BC) as 'MOY_BC'
 		FROM df, questionnaire
 		WHERE df.participant_virtual_id = questionnaire.participant_virtual_id
 		AND df.participant_virtual_id = '9999966'
