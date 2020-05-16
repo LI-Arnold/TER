@@ -1,23 +1,31 @@
 # TER
+-------------
+Analyse des données du questionnaire et des mesures des polluants  
+## L'exécution :  
 
-*** L'exécution : ***
-Pour exécuter le script R sous Linux :
+Pour exécuter le script R  
 
-taper dans Rstudio setwd("chemin jusqu'au dossier R") puis taper:
-source("Requetes.r") 
-source("Mediane.r") 
+* Sous Linux :  
 
-Sous windows :
+taper dans Rstudio setwd("chemin jusqu'au dossier TER/Scripts") puis taper:  
+source("Nom de script.r")  
 
-Après vous placez au dossier de travail de R ou y le dossier du projet "TER" exécutez :
-source("TER\\Requetes.r") 
-source("TER\\Mediane.r") 
+* Sous windows :  
 
-*** L'affichage : ***
+source("~/TER/Scripts/Nom de script.r")  
 
-view(resultatFinal) les différentes requetes selon chaque catégorie 
-view(mediane)  le médiane 
-View(mesures_participants) table contenant toutes les mesures des participants
-View(questionnaire) table du questionnaire
+## L'affichage :  
+
++ Première méthode :   
+Chargement des variables d'environnement avec la commande :  
+load("~/TER/Nom de workspace.RData")  
+Ensuite choisissez la variable à afficher sur l'onglet Global Environment de RStudio   
+
+
++ Deuxième méthode :  
+Après l'exécution des scripts en tapant sur la ligne de commandes :  
+View(resultatFinal) les différentes requetes selon chaque catégorie  
+View(df) table contenant toutes les mesures de tous les participants  
+View(questionnaire) table du questionnaire  
 
 
