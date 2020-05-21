@@ -9,6 +9,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+*Scripts* : etudePM.r  
+*Fichiers générés* : ecart_Poll_Participant, Bureau, Domicile, TempHum, moy_participant...   
+
 ## Etude sur les polluants 
 
 ```{r warning=FALSE,echo=FALSE}

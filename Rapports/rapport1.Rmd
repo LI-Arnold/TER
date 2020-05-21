@@ -19,6 +19,9 @@ library(flexdashboard)
 set.seed(955)
 load("~/TER/WorkspaceStatsCategorie.RData")
 ```
+*Scripts* : CategorieParticipant.r,  PlotPolluant.r  
+*Fichiers générés* : df( mesures), Questionnaire, PolluantParCategorie  
+
 ## Anomalies : 
   * Les participant qui ont répondu plusieurs fois au questionnaire :    
 9999915 2 fois, 99999 3 fois, 9999975 2fois, 9999988 2fois  

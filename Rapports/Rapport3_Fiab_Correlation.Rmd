@@ -16,9 +16,11 @@ library(sqldf)
 library(corrplot)
 library(tidyverse)
 library(dplyr)
-load("~/TER/Workspace.RData")
+load("~/TER/WorkspaceFiabilite.RData")
 ```
 
+*Scripts* : FiabiliteActiviteEvent.r, PolluantActivite.r; Corre,ation.r 
+*Fichiers générés* : activity_event, Activite{PM2.5?PM10...}, AnomaliesActivityEvent, NbrMatch, NbrAnomalies   
 
 ## Etude sur la fiabilité de Activité_événement :
 

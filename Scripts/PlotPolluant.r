@@ -58,29 +58,14 @@ MoyPolluantActivite[15,"activity"]<-"Vélo"
 
 ######################################  Partie 2 : Les diagramme de Polluants par rapport événement ############################################
 
-### Charger la table des associations logiques entre événement et activité et la mettre dans un dataframe:
-Activity_event<-read.csv("TER/Donnees/DonneesFiabilite.csv",header=TRUE,sep=";",stringsAsFactors = FALSE)
 
-### Extraire les associations activity_event qui existent dans df et qui n'existent pas dans la table référence (activite_event)
-
-ReqAnomaliesActivityEvent <- "Select *
-					From df d 
-					where d.event!='NULL' and not exists (select T.activity, T.event from Activity_event T where T.activity=d.activity and T.event=d.event)
-					Order by 1;"
-AnomaliesActivityEvent<-sqldf(ReqAnomaliesActivityEvent)
-
-### Creation une nouvelle dataframe avec les mesures des polluants sans compter les anomalies de Activité_Evenements
-
-ReqNouveauDF <- "Select * From df 
-				except 
-				select * from AnomaliesActivityEvent;"
-NouveauDF<-sqldf(ReqNouveauDF)
+source("~/TER/Scripts/initialiserSansAnomalies.r")
 
 ### Requete pour calculer la moyenne des polluants pour chaque événement
 
 ReqMoyPolluantEvent <- "select event,ROUND(AVG(\"PM2.5\"),2) as 'Moyenne_PM2.5',ROUND(avg(PM10),2) as 'Moyenne_PM10',ROUND(AVG(\"PM1.0\"),2) as 'Moyenne_PM1.0'
 ,ROUND(AVG(NO2),2) as 'Moyenne_NO2',ROUND(AVG(BC),2) as 'Moyenne_BC'
-from NouveauDF group by event;"
+from dfSansAnomalies group by event;"
 
 MoyPolluantEvent <- sqldf(ReqMoyPolluantEvent)
 
