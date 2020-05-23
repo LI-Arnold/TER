@@ -1,0 +1,53 @@
+---
+title: "Rapport final sur l'étude de polluant"
+output: pdf_document
+author: LI Arnold/EL ASSRI Aziz
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r warning=FALSE,echo=FALSE}
+library(knitr)
+```
+
+##Introduction
+
+Dans la vie de tous les jours, nous sommes tous exposés plus ou moins à de la pollution que ce soit chez soi ou même au travail mais cependant chaque personne est exposé differemment au même polluant, c'est pourquoi en utilisant un questionnaire auquel plusieurs participant ont répondu, on va essayer de comprendre pourquoi. 
+
+Dans cette étude on va étudier les PM1.0, les PM2.5, les PM10, le BC et le NO2. Les PM sont des particules fines et ultrafines dans l'air qui peuvent à un taux élévé avoir un risque sanitaire sur la population, le black carbone(BC) est aussi un polluant de l'air qui est essentiellement émis par les pots d'échappement et par la combustion domestique et est également dangereux pour la santé puis le dioxyde d'azote(NO2) est un polluant majeur de l'atmosphère terrestre produit par les moteurs à combustion interne et les centrales thermiques.
+
+##Objectif global
+
+On s'est fixé plusieurs objectif:
+
+> -- pouvoir comprendre des données à partir d'un questionnaire et de donnée fournis 
+  
+> -- faire le lien entre les données de mesure et de questionnaire 
+  
+> -- pouvoir les analyser
+  
+> -- savoir interpréter les résultats obtenus
+
+##Principal partie
+
+On a d'abord fait une étude générale c'est-à-dire que l'on a fait des réquêtes visant tous les participants du questionnaire en fonction de leurs catégories comme on peut le voir sur le pdf 'rapport.pdf' on a calculer la moyenne des polluant pour chaque catégories.
+
+##Résultats
+
+##Outils utilisé 
+
+Les outils qu'on a utilisé sont:
+
+> -- RStudio pour le langage de programmation car le langage R est très pratique pour faire des statistiques et analyser des données 
+  
+> -- SQLite pour les traitements des requêtes on a utilisé et les dataframes pour le stockage des tables
+
+> -- 
+
+##Problème rencontrée
+
+##Perspective
+
+##Conclusion
