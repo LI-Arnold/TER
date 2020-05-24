@@ -30,11 +30,31 @@ On s'est fixé plusieurs objectif:
   
 > -- savoir interpréter les résultats obtenus
 
-##Principal partie
+#Principal partie et resultats
 
-On a d'abord fait une étude générale c'est-à-dire que l'on a fait des réquêtes visant tous les participants du questionnaire en fonction de leurs catégories comme on peut le voir sur le pdf 'rapport.pdf' on a calculer la moyenne des polluant pour chaque catégories.
+###Etude polluant en fonction des catégorie
 
-##Résultats
+On a d'abord fait une étude générale c'est-à-dire que l'on a fait des réquêtes visant tous les participants du questionnaire en fonction de leurs catégories comme on peut le voir sur le pdf 'rapport1.pdf' on a calculer la moyenne des polluant pour chaque catégories.On remarque que les non sportif et les personnes 35 à 50 ans sont les plus exposés au particules fines.
+
+###Etude polluant en fonction des participants
+
+Ensuite sur le rapport2, on a calculer les moyennes des polluants en fonction des participants et on avait remarqué que c'est le participant 9999932 qui était le plus exposé mais qu'il avait aussi des valeurs abérrantes et qu'il était aussi le seul non sportif du coup on s'est aussi intérressé au participant 9999944 et 9999946 car ils avaient une forte exposition avec partiquement aucune valeur aberrante.
+
+###Etude sur la fiabilité
+
+On s'est poser la question sur la fiabiliter des données que l'on avait qui est plus expliquer sur le rapport3, on a listé sur le pdf les anomalies des activité et event auquelles cela ne correspondait pas 
+
+###Etude polluant en fonction des activités
+
+Sur ce même pdf on calculer les moyennes des polluants en fonction des activités et on a remarqué que dans les restaurants, il y avait une forte exposition au polluants
+
+###Etude sur la corrélation
+
+On a essayer de chercher s'il exister des corrélation entre les différentes données et en effet entre les différents particules ce qui est évident puisqu'ils ne se différencie par leur taille et on a trouver que les autres corrélation étaient soit trop faible ou très peu intérressant 
+
+###Etude polluant en fonction des events
+
+D'après le pdf sur plot_polluant on en a déduit que les events allumages de cheminé et marcher était ceux qui produisé le plus de polluant. Ce qui parait logique puisque marcher on est forcément dehors sont plus exposé au polluant de l'air et allumage de cheminé qui crée de la fumée qui est signe que le bois brule mal et donc qui génére des particule cancérigènes.
 
 ##Outils utilisé 
 
