@@ -1,10 +1,7 @@
 # TER
 -------------
 Analyse des données du questionnaire et des mesures des polluants  
-## L'exécution :  
-
-Analyse des données du questionnaire et des mesures des polluants  
-## L'exécution :  
+## L'exécution :   
 
 Pour exécuter le script R  
 
@@ -22,8 +19,12 @@ Ensuite choisissez la variable à afficher sur l'onglet Global Environment de RS
 
 + Deuxième méthode :  
 Après l'exécution des scripts en tapant sur la ligne de commandes :  
-View(resultatFinal) les différentes requetes selon chaque catégorie  
+View(PolluantParCategorie) les différentes requetes selon chaque catégorie  
 View(df) table contenant toutes les mesures de tous les participants  
 View(questionnaire) table du questionnaire  
 
+## L'affichage :  
 
+pour lancer l'application web faut d'abord charger le jeu de donner, ca cera plus simple qu'exécuter plusieurs scripts:  
+load("~/TER/Nom de workspace.RData")  
+ensuite entrez la commande : runApp('TER/AppWeb')  
