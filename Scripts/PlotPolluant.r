@@ -1,6 +1,7 @@
 
 ### Charger Table des mesures
-source("~/TER/Scripts/initialiser.r")
+source("~/TER/Scripts/initialiserSansAnomalies.r")
+#Questionnaire<-read.csv("~/TER/Donnees/questionnaire_participants.csv",header=TRUE,sep=",",stringsAsFactors=FALSE)
 
 ######################################  Partie 1 : Les diagrammes de Polluant par rapport activité ############################################
 
@@ -8,11 +9,16 @@ source("~/TER/Scripts/initialiser.r")
 ### Librairie pour créer les plots
 library(ggplot2)
 
+#~ convertir en numeric les valeurs de NO2 et BC
+
+dfSansAnomalies$NO2 <- as.numeric(dfSansAnomalies$NO2)
+dfSansAnomalies$BC <- as.numeric(dfSansAnomalies$BC)	
+
 ### Requete pour calculer la moyenne des polluants pour chaque activité
 
 ReqMoyPolluantActivite <- "select activity,ROUND(AVG(\"PM2.5\"),2) as 'Moyenne_PM2.5',ROUND(avg(PM10),2) as 'Moyenne_PM10',ROUND(AVG(\"PM1.0\"),2) as 'Moyenne_PM1.0'
 ,ROUND(AVG(NO2),2) as 'Moyenne_NO2',ROUND(AVG(BC),2) as 'Moyenne_BC'
-from df group by activity;"
+from Questionnaire,dfSansAnomalies WHERE Questionnaire.participant_virtual_id = dfSansAnomalies.participant_virtual_id group by activity;"
 
 MoyPolluantActivite <- sqldf(ReqMoyPolluantActivite)
 
@@ -59,8 +65,6 @@ MoyPolluantActivite[15,"activity"]<-"Vélo"
 ######################################  Partie 2 : Les diagramme de Polluants par rapport événement ############################################
 
 
-source("~/TER/Scripts/initialiserSansAnomalies.r")
-
 ### Requete pour calculer la moyenne des polluants pour chaque événement
 
 ReqMoyPolluantEvent <- "select event,ROUND(AVG(\"PM2.5\"),2) as 'Moyenne_PM2.5',ROUND(avg(PM10),2) as 'Moyenne_PM10',ROUND(AVG(\"PM1.0\"),2) as 'Moyenne_PM1.0'
@@ -101,6 +105,6 @@ MoyPolluantEvent[8,"event"]<-"Ouverture De Fenêtre"
 
  ### Pourcentage de NO2 pour chaque événement :
  pieNO2Event<- ggplot(MoyPolluantEvent, aes(x="", y=Moyenne_NO2, fill=event))+
-     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * Moyenne_PM10/ sum(Moyenne_NO2))) , position = position_stack(vjust = 0.5)) +
+     geom_bar(width=1, stat = "identity")+geom_text(aes(label =  round(100 * Moyenne_NO2/ sum(Moyenne_NO2))) , position = position_stack(vjust = 0.5)) +
      labs(fill = "Evénement", x = NULL, y = NULL,  title = "Mesures de NO2 par event en % ") +  coord_polar("y", start=0)+
 	scale_fill_manual(values = colors)

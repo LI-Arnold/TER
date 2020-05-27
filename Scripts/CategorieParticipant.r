@@ -32,7 +32,7 @@ sql3 ="SELECT
 		WHEN  q_21='Oui' THEN 'Expose a la fumee'
 		END	as  Categorie, min(\"PM2.5\") as 'MIN_P2.5' ,max(\"PM2.5\")  as 'MAX_PM2.5',ROUND(avg(\"PM2.5\"),2) as 'MOY_PM2.5',min(PM10) as 'MIN_PM10',max(PM10) as 'MAX_PM10',ROUND(avg(PM10),2) as 'MOY_PM10',min(\"PM1.0\") as 'MIN_PM1.0',max(\"PM1.0\") as 'MAX_PM1.0',ROUND(avg(\"PM1.0\"),2) as 'MOY_PM1.0', max(cast(NO2 AS INTEGER)) as 'MAX_NO2' , min(cast(NO2 AS INTEGER)) as 'MIN_NO2' , ROUND(avg(NO2),2) as 'MOY_NO2' , max(cast(BC AS INTEGER)) as 'MAX_BC',min(cast(BC AS INTEGER)) as 'MIN_BC' ,ROUND(avg(BC),2) as 'MOY_BC'
 		FROM Questionnaire,df 
-		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id AND q_21 IS NOT NULL
+		WHERE Questionnaire.participant_virtual_id = df.participant_virtual_id
 		GROUP BY Categorie HAVING(q_21 NOT NULL);"
 
 ### Requête pour calculer le min, max et moyenne des polluants pour les participants sensible et non sensible à la pollution			

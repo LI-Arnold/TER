@@ -40,7 +40,7 @@ GPS_Mesures$NO2<-as.numeric(GPS_Mesures$NO2)
 GPS_Mesures$BC<-as.numeric(GPS_Mesures$BC)
 
 ###  selection les colonnes avec des valeurs numeric 
-	<-GPS_Mesures[,3:11]
+Correlation	<-GPS_Mesures[,3:11]
 
 ### Matrice de correlation 
 matriceCorr<-round(cor(Correlation, use = "complete.obs"),2)
