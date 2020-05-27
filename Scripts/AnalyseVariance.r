@@ -16,7 +16,7 @@ dfVariancePM2.5$activity <- as.factor(dfVariancePM2.5$activity)
 dfVariancePM2.5$event <- as.factor(dfVariancePM2.5$event)
 
 ### Appliquer modele Anova à deux facteurs (event et activity) pour PM2.5
-modelePM2.5<- aov( PM2.5 ~ activity + event +,data=dfVariancePM2.5)
+modelePM2.5<- aov( PM2.5 ~ activity + event ,data=dfVariancePM2.5)
 
 ### Affichage les resultats de l'anova
 summary(modelePM2.5)

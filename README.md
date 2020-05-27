@@ -23,8 +23,8 @@ View(PolluantParCategorie) les différentes requetes selon chaque catégorie
 View(df) table contenant toutes les mesures de tous les participants  
 View(questionnaire) table du questionnaire  
 
-## L'affichage :  
+## Lancer la mini-application :  
 
-pour lancer l'application web faut d'abord charger le jeu de donner, ca cera plus simple qu'exécuter plusieurs scripts:  
-load("~/TER/Nom de workspace.RData")  
+pour lancer l'application web faut d'abord charger le jeu de données, ca sera plus simple qu'exécuter plusieurs scripts:  
+load("~/TER/AppWeb/appShiny.RData")  
 ensuite entrez la commande : runApp('TER/AppWeb')  
