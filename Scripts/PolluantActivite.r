@@ -2,7 +2,7 @@
 library(tidyverse)
 
 source("~/TER/Scripts/initialiserSansAnomalies.r")
-#Questionnaire<-read.csv("~/TER/Donnees/questionnaire_participants.csv",header=TRUE,sep=",",stringsAsFactors=FALSE)
+Questionnaire<-read.csv("~/TER/Donnees/questionnaire_participants.csv",header=TRUE,sep=",",stringsAsFactors=FALSE)
 
 #~ convertir en numeric les valeurs de NO2 et BC
 

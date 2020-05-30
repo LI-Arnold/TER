@@ -67,7 +67,7 @@ BoxplotTemperature<- ggplot(dfSansAnomalies, aes( x=activity,y=Temperature, fill
 
 ########################################################## Traitement Outliers BC ##########################################################
 
---------------------1ier traitement de Outliers de BC pour l'activité NULL :---------------------------
+#--------------------1ier traitement de Outliers de BC pour l'activité NULL :---------------------------
 
 ## table mesure de BC pour l'activité null
 dfBCActiviteNull <- dfSansAnomalies %>% filter(activity=="NULL")
@@ -108,7 +108,7 @@ dfSansAnomalies[dfSansAnomalies$activity == "NULL" , "BC"] <- ifelse(is_outlier_
 
  boxplot( dfSansAnomalies[dfSansAnomalies$activity == "Voiture" , "BC"],horizontal = TRUE)
  
- --------------------2ème traitement de Outliers de BC pour l'activité Voiture:-------------------------
+ #--------------------2ème traitement de Outliers de BC pour l'activité Voiture:-------------------------
  
  thirdQt <- quantile(dfSansAnomalies[dfSansAnomalies$activity == "Voiture" , "BC"] , 0.75,na.rm = TRUE)
  
@@ -118,7 +118,7 @@ dfSansAnomalies[dfSansAnomalies$activity == "NULL" , "BC"] <- ifelse(is_outlier_
  
  dfSansAnomalies[dfSansAnomalies$activity == "Voiture" , "BC"] <- ifelse(is_outlier_inf(dfSansAnomalies[dfSansAnomalies$activity == "Voiture" , "BC"]), firstQt ,dfSansAnomalies[dfSansAnomalies$activity == "Voiture" , "BC"])
 
-  --------------------3ème traitement de Outliers de BC globalement -------------------------------
+  #--------------------3ème traitement de Outliers de BC globalement -------------------------------
   
 
 outlier_BC_valeurs <- boxplot.stats(dfSansAnomalies$BC)$out

@@ -2,7 +2,7 @@
 source("~/TER/Scripts/initialiser.r")
 
 ### Charger les données du questionnaire
-Questionnaire<-read.csv("questionnaire_participants.csv",header=TRUE,sep=",",stringsAsFactors=FALSE)
+Questionnaire<-read.csv("~/TER/Donnees/questionnaire_participants.csv",header=TRUE,sep=",",stringsAsFactors=FALSE)
 
 ### Requête pour calculer le min, max et moyenne des polluants pour les participants sportifs et non sportifs
 sql1 ="SELECT  

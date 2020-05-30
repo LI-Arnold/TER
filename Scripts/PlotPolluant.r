@@ -1,7 +1,7 @@
 
 ### Charger Table des mesures
 source("~/TER/Scripts/initialiserSansAnomalies.r")
-#Questionnaire<-read.csv("~/TER/Donnees/questionnaire_participants.csv",header=TRUE,sep=",",stringsAsFactors=FALSE)
+Questionnaire<-read.csv("~/TER/Donnees/questionnaire_participants.csv",header=TRUE,sep=",",stringsAsFactors=FALSE)
 
 ######################################  Partie 1 : Les diagrammes de Polluant par rapport activité ############################################
 
